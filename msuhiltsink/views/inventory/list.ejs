@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory - MSU HealthSync</title>
+</head>
+<body>
+    <h1>Inventory List</h1>
+    <a href="/inventory/add" class="add-item-btn">Add New Item</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Category</th>
+                <th>Quantity</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr> 
+        </thead>
+        <tbody>
+            <% inventoryItems.forEach(item => { %>
+            <tr>
+                <td><%= item.item_name %></td>
+                <td><%= item.category %></td>
+                <td><%= item.quantity %></td>
+                <td><%= item.expiry_date ? item.expiry_date.toISOString().split('T')[0] : 'N/A' %></td> <!-- Format date to YYYY-MM-DD -->
+                <td class="action-links">
+                    <a href="/inventory/edit/<%= item.inventory_id %>">Edit</a>
+                    <a href="/inventory/history/<%= item.inventory_id %>">History</a>
+                    <a href="/inventory/add-quantity/<%= item.inventory_id %>">Add Quantity</a>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

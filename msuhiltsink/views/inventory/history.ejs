@@ -1,0 +1,28 @@
+<!-- views/inventory/history.ejs -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory History</title>
+</head>
+<body>
+  <h1>Inventory History</h1>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Quantity Added</th>
+        <th>Date of Addition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% itemHistory.forEach(item => { %>
+        <tr>
+          <td><%= item.quantityAdded %></td>
+          <td><%= item.timestamp.toLocaleString() %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+  <a href="/inventory/list">Back to Inventory List</a>
+</body>
+</html>

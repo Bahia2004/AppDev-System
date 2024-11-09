@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient List</title>
+</head>
+
+<body>
+    <h1>Patient List</h1>
+    <table border="1">
+        <tr>
+            <th>School ID</th>
+            <th>Full Name</th>
+            <th>Contact</th>
+            <th>Address</th>
+            <th>Department</th>
+            <th>Blood Type</th>
+            <th>Gender</th>
+            <th>Guardian</th>
+            <th>Guardian Contact</th>
+            <th>Height (cm)</th>
+            <th>Weight (kg)</th>
+            <th>Actions</th>
+        </tr>
+        <% patients.forEach(patient => { %>
+            <tr>
+                <td><%= patient.patient_id %></td>
+                <td><%= patient.fullName %></td>
+                <td><%= patient.contact %></td>
+                <td><%= patient.address %></td>
+                <td><%= patient.department %></td>
+                <td><%= patient.bloodType %></td>
+                <td><%= patient.gender %></td>
+                <td><%= patient.guardian %></td>
+                <td><%= patient.guardian_contact %></td>
+                <td><%= patient.height %></td>
+                <td><%= patient.weight %></td>
+                <td>
+                    <a href="/patient/edit/<%= patient.patient_id %>">Edit</a>
+                    <a href="/patient/history/<%= patient.patient_id %>">History</a>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+    <a href="/patient/add">Add New Patient</a>
+</body>
+
+</html>

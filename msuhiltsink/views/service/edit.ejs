@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Edit Service</h1>
+    <form action="/service/edit/<%= service.service_id %>" method="POST">
+
+        <label for="doctor_in_charge">Doctor in Charge:</label>
+        <input type="text" id="doctor_in_charge" name="doctor_in_charge" value="<%= service.doctor_in_charge %>" required><br><br>
+
+        <label for="blood_pressure">Blood Pressure:</label>
+        <input type="text" id="blood_pressure" name="blood_pressure" value="<%= service.blood_pressure %>" required><br><br>
+
+        <label for="pulse_rate">Pulse Rate:</label>
+        <input type="text" id="pulse_rate" name="pulse_rate" value="<%= service.pulse_rate %>" required><br><br>
+
+        <label for="respiratory_rate">Respiratory Rate:</label>
+        <input type="text" id="respiratory_rate" name="respiratory_rate" value="<%= service.respiratory_rate %>" required><br><br>
+
+        <label for="service_type">Service Type:</label>
+        <input type="text" id="service_type" name="service_type" value="<%= service.service_type %>" required><br><br>
+
+        <label for="temperature">Temperature:</label>
+        <input type="text" id="temperature" name="temperature" value="<%= service.temperature %>" required><br><br>
+
+        <label for="medical_notes">Medical Notes:</label>
+        <textarea id="medical_notes" name="medical_notes" rows="3" required><%= service.medical_notes %></textarea><br><br>
+
+        <label for="medication">Medication:</label>
+        <textarea id="medication" name="medication" rows="3" required><%= service.medication %></textarea><br><br>
+
+        <button type="submit">Update Service</button>
+    </form>
+</body>
+</html>

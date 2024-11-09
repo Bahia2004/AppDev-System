@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Service List</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                
+                <th>Patient ID</th>
+                <th>Patient Name</th>
+                <th>Doctor In Charge</th>
+                <th>Date</th>
+                <th>Service Type</th>
+                <th>Blood Pressure</th>
+                <th>Pulse Rate</th>
+                <th>Respiratory Rate</th>
+                <th>Temperature</th>
+                <th>Medication</th>
+                <th>Medical Notes</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (services.length > 0) { %>
+                <% services.forEach(service => { %>
+                    <tr>
+                        <td><%= service.patient_id %></td>
+                        <td><%= service.patient_name %></td>
+                        <td><%= service.doctor_in_charge %></td>
+                        <td><%= new Date(service.date).toLocaleDateString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' }) %></td>
+                        <td><%= service.service_type %></td>
+                        <td><%= service.blood_pressure %></td>
+                        <td><%= service.pulse_rate %></td>
+                        <td><%= service.respiratory_rate %></td>
+                        <td><%= service.temperature %></td>
+                        <td><%= service.medication %></td>
+                        <td><%= service.medical_notes %></td>
+                        <td>
+                            <a href="/service/edit/<%= service.service_id %>">Edit</a> 
+                        </td>
+                    </tr>
+                <% }) %>
+            <% } else { %>
+                <tr>
+                    <td colspan="13">No services found.</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+    <a href="/service/add">Add New Patient</a>
+</body>
+</html>

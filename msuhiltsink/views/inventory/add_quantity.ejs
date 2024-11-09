@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Quantity</title>
+</head>
+<body>
+    <h1>Add Quantity for <%= item.item_name %></h1>
+    <form action="/inventory/add-quantity/<%= item.inventory_id %>" method="POST">
+        <label>Quantity to Add:</label>
+        <input type="number" name="quantity_to_add" required min="1">
+        <button type="submit">Add Quantity</button>
+    </form>
+    <a href="/inventory/list">Back to Inventory</a>
+</body>
+</html>

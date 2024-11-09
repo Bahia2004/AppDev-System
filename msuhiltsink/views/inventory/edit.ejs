@@ -1,0 +1,22 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Inventory Item</title>
+</head>
+<body>
+    <h1>Edit Inventory Item</h1>
+    <form action="/inventory/edit/<%= item.inventory_id %>" method="POST">
+        <label>Category:</label>
+        <input type="text" name="category" value="<%= item.category %>" required><br>
+        
+        <label>Item Name:</label>
+        <input type="text" name="item_name" value="<%= item.item_name %>" required><br>
+        
+        <label>Quantity:</label>
+        <input type="number" value="<%= item.quantity %>" readonly><br>
+        
+        <button type="submit">Update Item</button>
+    </form>
+</body>
+</html>

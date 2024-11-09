@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= patient.fullName %> - Service History</title>
+</head>
+<body>
+
+        <h1><%= patient.fullName %></h1>
+        <p><strong>Patient ID:</strong> <%= patient.patient_id %></p>
+        <p><strong>Address:</strong> <%= patient.address %></p>
+        <p><strong>Contact:</strong> <%= patient.contact %></p>
+        <p><strong>Department:</strong> <%= patient.department %></p>
+        
+        <h2>Service Records</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Doctor In Charge</th>
+                    <th>Date</th>
+                    <th>Service Type</th>
+                    <th>Blood Pressure</th>
+                    <th>Pulse Rate</th>
+                    <th>Respiratory Rate</th>
+                    <th>Temperature</th>
+                    <th>Medication</th>
+                    <th>Medical Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (serviceHistory.length > 0) { %>
+                    <% serviceHistory.forEach(service => { %>
+                        <tr>
+                            <td><%= service.doctor_in_charge %></td>
+                            <td><%= new Date(service.date).toLocaleDateString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' }) %></td>
+                            <td><%= service.service_type %></td>
+                            <td><%= service.blood_pressure || 'N/A' %></td>
+                            <td><%= service.pulse_rate || 'N/A' %></td>
+                            <td><%= service.respiratory_rate || 'N/A' %></td>
+                            <td><%= service.temperature || 'N/A' %></td>
+                            <td><%= service.medication || 'N/A' %></td>
+                            <td><%= service.medical_notes || 'N/A' %></td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="9">No service history recorded for this patient.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+
+        <a href="/patient/list">Back to Patient List</a>
+</body>
+</html>
