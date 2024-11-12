@@ -1,15 +1,82 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Service List</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 10px 15px;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e9f5ff;
+        }
+        td {
+            border-bottom: 1px solid #ddd;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+        .no-services {
+            text-align: center;
+            color: #888;
+            font-style: italic;
+        }
+        .add-button {
+            display: block;
+            text-align: center;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            width: 200px;
+            transition: background-color 0.3s;
+        }
+        .add-button:hover {
+            background-color: #218838;
+        }
+    </style>
 </head>
 <body>
     <h1>Service List</h1>
-    <table border="1">
+    <table>
         <thead>
             <tr>
-                
                 <th>Patient ID</th>
                 <th>Patient Name</th>
                 <th>Doctor In Charge</th>
@@ -40,17 +107,17 @@
                         <td><%= service.medication %></td>
                         <td><%= service.medical_notes %></td>
                         <td>
-                            <a href="/service/edit/<%= service.service_id %>">Edit</a> 
+                            <a href="/service/edit/<%= service.service_id %>">Edit</a>
                         </td>
                     </tr>
                 <% }) %>
             <% } else { %>
                 <tr>
-                    <td colspan="13">No services found.</td>
+                    <td colspan="12" class="no-services">No services found.</td>
                 </tr>
             <% } %>
         </tbody>
     </table>
-    <a href="/service/add">Add New Patient</a>
+    <a href="/service/add" class="add-button">Add New Patient</a>
 </body>
 </html>
