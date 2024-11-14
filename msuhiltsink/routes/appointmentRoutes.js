@@ -1,14 +1,17 @@
-/*const express = require('express');
+const express = require('express');
 const router = express.Router();
 const appointmentController = require('../controllers/appointmentController');
-const reminderController = require('../controllers/reminderController');
 
-router.get('/', appointmentController.getAppointments);
-router.post('/add', appointmentController.addAppointment);
-router.put('/update/:id', appointmentController.updateAppointment);
-router.delete('/delete/:id', appointmentController.deleteAppointment);
+// Show all appointments
+router.get('/', appointmentController.showAppointments);
 
-router.get('/reminders/:appointment_id', reminderController.getReminders);
-router.post('/reminders/add', reminderController.addReminder);
+// Book an appointment
+router.post('/book', appointmentController.bookAppointment);
+
+// Reschedule an appointment
+router.post('/reschedule', appointmentController.rescheduleAppointment);
+
+// Cancel an appointment
+router.post('/cancel', appointmentController.cancelAppointment);
 
 module.exports = router;
