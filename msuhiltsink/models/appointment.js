@@ -52,14 +52,15 @@ class Appointment {
     // Method to cancel an appointment
     static async cancelAppointment(appointment_id) {
         if (!appointment_id) throw new Error("Appointment ID is required to cancel");
-
-        const query = 'UPDATE appointments SET status = ? WHERE appointment_id = ?';
-        const [result] = await db.execute(query, ['Canceled', appointment_id]);
+    
+        // Deleting the appointment from the database
+        const query = 'DELETE FROM appointments WHERE appointment_id = ?';
+        const [result] = await db.execute(query, [appointment_id]);
         
         if (result.affectedRows === 0) {
-            throw new Error("Appointment not found or could not be canceled");
+            throw new Error("Appointment not found or could not be deleted");
         }
-
+    
         return result.affectedRows;
     }
 
