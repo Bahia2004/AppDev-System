@@ -4,17 +4,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= patient.fullName %> - Service History</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background-color: #e9f7f6; /* Light teal background for clinic feel */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 220px;
+            background-color: #2d3e3b; /* Dark green for sidebar */
+            padding-top: 20px;
+            padding-left: 15px;
+        }
+
+        .sidebar a {
+            padding: 15px;
+            text-align: left;
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .sidebar a:hover {
+            background-color: #4CAF50; /* Highlight color on hover */
+        }
+
+        .content {
+            margin-left: 240px;
+            padding: 30px;
+        }
+
+        .content h1 {
+            color: #2d3e3b; /* Matching color with sidebar */
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .content p {
+            font-size: 18px;
+            margin: 8px 0;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 12px;
+        }
+
+        th {
+            background-color: #2d3e3b;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #00796b;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <img src="https://mmc-enrollment.minsu.edu.ph/img/logo.png" alt="MSU Logo" class="img-fluid mb-3" style="max-width: 80%; padding-left: 15px;">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/patient/list">Patient Records</a>
+        <a href="/appointment">Appointment</a>
+        <a href="/inventory/list">Medicine Inventory</a>
+        <a href="/service/list">Medical Services</a>
+        <a href="/history">History</a>
+    </div>
 
+    <!-- Main content area -->
+    <div class="content">
         <h1><%= patient.fullName %></h1>
         <p><strong>Patient ID:</strong> <%= patient.patient_id %></p>
         <p><strong>Address:</strong> <%= patient.address %></p>
         <p><strong>Contact:</strong> <%= patient.contact %></p>
+        <p><strong>Email Address:</strong> <%= patient.email %></p>
         <p><strong>Department:</strong> <%= patient.department %></p>
         
         <h2>Service Records</h2>
-        <table border="1">
+        <table>
             <thead>
                 <tr>
                     <th>Doctor In Charge</th>
@@ -52,5 +163,10 @@
         </table>
 
         <a href="/patient/list">Back to Patient List</a>
+    </div>
+
+    <footer>
+        <p>MSU HealthSync - Clinic Management System</p>
+    </footer>
 </body>
 </html>
