@@ -3,6 +3,7 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const adminRoutes = require('./routes/adminRoutes');
 const inventoryRoutes = require('./routes/inventoryRoutes');
+const appointmentRoutes = require('./routes/appointmentRoutes');
 const patientRoutes = require('./routes/patientRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
 
@@ -22,11 +23,16 @@ app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
   if (req.session.adminId) {
-    res.redirect('/inventory/list'); // Redirect to a dashboard if already logged in
+    res.redirect('/dashboard'); // Redirect to a dashboard if already logged in
   } else {
     res.redirect('/admin/login'); // Redirect to login page if not logged in
   }
 });
+
+app.get('/dashboard', ensureAuthenticated, (req, res) => {
+  res.render('dashboard'); // Ensure a 'dashboard.ejs' view exists in the 'views' folder
+});
+
 
 //Admin 
 app.get('/admin/login', (req, res) => {
@@ -70,7 +76,7 @@ app.use('/admin', adminRoutes);
 app.use('/inventory', inventoryRoutes);
 app.use('/patient', patientRoutes);
 app.use('/service', serviceRoutes);
-
+app.use('/appointment', appointmentRoutes);
 
 // Start server
 app.listen(3000, () => {
