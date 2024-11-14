@@ -12,19 +12,21 @@ async function showAppointments(req, res) {
     }
 }
 
-// Book a new appointment
+/// Book a new appointment
 async function bookAppointment(req, res) {
     const { patient_id, appointment_date } = req.body;
     try {
         const appointmentId = await Appointment.createAppointment(patient_id, appointment_date);
 
-        // Get patient's email (You might need a method to get patient details)
+        // Get the patient's email dynamically (from your database)
         const patientEmail = await Appointment.getPatientEmail(patient_id);
 
-        // Send booking confirmation email
-        await sendEmail(patientEmail, 'Appointment Confirmation', `Your appointment has been successfully booked for ${appointment_date}.`);
+        // Send booking confirmation email dynamically
+        const subject = 'Appointment Confirmation';
+        const text = `Your appointment has been successfully booked for ${appointment_date}.`;
+        await sendEmail(patientEmail, subject, text);  // Dynamically passing email and content
 
-        res.redirect('/appointment'); // Redirect to the appointments page
+        res.redirect('/appointment');  // Redirect to appointments page
     } catch (error) {
         console.error('Error booking appointment:', error);
         res.status(500).send('Error booking appointment');
@@ -37,14 +39,15 @@ async function rescheduleAppointment(req, res) {
     try {
         await Appointment.rescheduleAppointment(appointment_id, new_date);
 
-        // Get patient's email for reschedule notification
+        // Get the patient's email dynamically for reschedule notification
         const appointmentDetails = await Appointment.getAppointmentDetails(appointment_id);
         const patientEmail = await Appointment.getPatientEmail(appointmentDetails.patient_id);
 
-        // Send reschedule email
-        await sendEmail(patientEmail, 'Appointment Rescheduled', `Your appointment has been rescheduled to ${new_date}.`);
+        const subject = 'Appointment Rescheduled';
+        const text = `Your appointment has been rescheduled to ${new_date}.`;
+        await sendEmail(patientEmail, subject, text);
 
-        res.redirect('/appointment'); // Redirect to appointments page
+        res.redirect('/appointment');
     } catch (error) {
         console.error('Error rescheduling appointment:', error);
         res.status(500).send('Error rescheduling appointment');
@@ -75,14 +78,11 @@ async function cancelAppointment(req, res) {
         // Fetch patient's email for the cancellation notification
         const patientEmail = await Appointment.getPatientEmail(patient_id);
 
-        // Send email notification (optional, if you want to notify the patient)
-        await sendEmail(patientEmail, 'Appointment Canceled', 'Your appointment has been canceled.');
-
-        // Respond with success message
-        res.status(200).json({
-            message: 'Appointment canceled successfully',
-            patientEmail: patientEmail, // Optionally send the email to confirm
-        });
+        // Send email notification for cancellation
+        const subject = 'Appointment Canceled';
+        const text = 'Your appointment has been canceled.';
+        await sendEmail(patientEmail, subject, text);
+        res.redirect('/appointment');
 
     } catch (error) {
         console.error('Error canceling appointment:', error);
