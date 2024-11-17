@@ -6,6 +6,7 @@ const inventoryRoutes = require('./routes/inventoryRoutes');
 const appointmentRoutes = require('./routes/appointmentRoutes');
 const patientRoutes = require('./routes/patientRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
+const historyRoutes = require('./routes/historyRoutes');
 
 const app = express();
 
@@ -76,6 +77,7 @@ app.use('/admin', adminRoutes);
 app.use('/inventory', inventoryRoutes);
 app.use('/patient', patientRoutes);
 app.use('/service', serviceRoutes);
+app.use('/history', historyRoutes);
 app.use('/appointment', appointmentRoutes);
 
 // Start server
