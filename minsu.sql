@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 09, 2024 at 10:02 AM
+-- Generation Time: Nov 17, 2024 at 09:21 AM
 -- Server version: 8.3.0
 -- PHP Version: 8.2.18
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`admin_id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `admin`
@@ -46,7 +46,8 @@ INSERT INTO `admin` (`admin_id`, `username`, `password`, `email`, `created_at`) 
 (1, 'Bahia_Alfia', '$2b$10$j3oMbRInpX3bq9xxVof7le.xR0TnyMbZwIYgpqvoGMQXwidVrZZHm', 'alfiaaronbahia07@gmail.com', '2024-11-06 00:40:04'),
 (2, 'lala', '$2b$10$.l27WfAZhF5xBLAoc6Vpm.P6np6iXDcgEnQ2TPL7CURHh4vxjHGfS', 'alfiaaronbahia@gmail.com', '2024-11-08 15:30:35'),
 (3, 'shyne', '$2b$10$SWIw0XruA8sL/.MpEfqou.S8EsBRDoYLYsPHxFmp1ywGDAGmp1TW6', 'alfia@gmail.com', '2024-11-09 09:37:22'),
-(4, 'chynna', '$2b$10$8jiqBeCkP4.5cBxjJWn9e.RXgM.qJCYrme4l7rzaQQn8AY8sTDS2.', 'chynnaAlemania@gmail.com', '2024-11-09 09:40:28');
+(4, 'chynna', '$2b$10$8jiqBeCkP4.5cBxjJWn9e.RXgM.qJCYrme4l7rzaQQn8AY8sTDS2.', 'chynnaAlemania@gmail.com', '2024-11-09 09:40:28'),
+(5, 'user1', '$2b$10$5MMpnrg9DFljni.GnFVJxuNw/JDx77y6YgdoMb232k9nUGNd47ihK', 'user1@gmail.com', '2024-11-10 05:07:21');
 
 -- --------------------------------------------------------
 
@@ -57,29 +58,21 @@ INSERT INTO `admin` (`admin_id`, `username`, `password`, `email`, `created_at`) 
 DROP TABLE IF EXISTS `appointments`;
 CREATE TABLE IF NOT EXISTS `appointments` (
   `appointment_id` int NOT NULL AUTO_INCREMENT,
-  `patient_id` int DEFAULT NULL,
+  `patient_id` int NOT NULL,
   `appointment_date` datetime NOT NULL,
-  `status` varchar(50) DEFAULT 'Scheduled',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` enum('Booked','Rescheduled','Canceled') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Booked',
   PRIMARY KEY (`appointment_id`),
   KEY `patient_id` (`patient_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Table structure for table `appointment_reminders`
+-- Dumping data for table `appointments`
 --
 
-DROP TABLE IF EXISTS `appointment_reminders`;
-CREATE TABLE IF NOT EXISTS `appointment_reminders` (
-  `reminder_id` int NOT NULL AUTO_INCREMENT,
-  `appointment_id` int DEFAULT NULL,
-  `reminder_date` datetime NOT NULL,
-  `reminder_text` text,
-  PRIMARY KEY (`reminder_id`),
-  KEY `appointment_id` (`appointment_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+INSERT INTO `appointments` (`appointment_id`, `patient_id`, `appointment_date`, `status`) VALUES
+(1, 220298, '2024-11-15 20:56:00', 'Canceled'),
+(6, 220294, '2024-11-14 22:30:00', 'Canceled'),
+(7, 220279, '2024-11-28 22:45:00', 'Booked');
 
 -- --------------------------------------------------------
 
@@ -123,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `inventory` (
 --
 
 INSERT INTO `inventory` (`inventory_id`, `item_name`, `category`, `quantity`, `expiry_date`, `created_at`, `updated_at`, `quantity_added`) VALUES
-(1, 'Amoxicilin', 'Antibiotic', 21, '2024-11-09', '2024-11-06 12:53:17', '2024-11-09 09:50:55', 1),
+(1, 'Amoxicilin', 'Antibiotic', 60025, '2024-11-09', '2024-11-06 12:53:17', '2024-11-10 10:30:40', 3),
 (3, 'Albuterol', 'Asthma', 13, '2024-11-23', '2024-11-07 03:37:56', '2024-11-08 13:44:39', 2),
 (4, 'Bioflu', 'unknown', 8, '2024-11-08', '2024-11-07 08:52:42', '2024-11-09 09:01:54', 1),
 (6, 'Metformin', 'Antidiabetic', 5, '2024-11-20', '2024-11-08 11:29:31', '2024-11-08 11:29:31', 0);
@@ -141,6 +134,7 @@ CREATE TABLE IF NOT EXISTS `patients` (
   `gender` varchar(10) DEFAULT NULL,
   `address` varchar(255) NOT NULL,
   `contact` varchar(11) NOT NULL,
+  `email` text NOT NULL,
   `guardian` varchar(150) NOT NULL,
   `guardian_contact` varchar(11) NOT NULL,
   `bloodType` char(3) NOT NULL,
@@ -156,12 +150,13 @@ CREATE TABLE IF NOT EXISTS `patients` (
 -- Dumping data for table `patients`
 --
 
-INSERT INTO `patients` (`patient_id`, `fullName`, `gender`, `address`, `contact`, `guardian`, `guardian_contact`, `bloodType`, `height`, `weight`, `department`, `createdAt`) VALUES
-(220298, 'Alfia A. Bahia', 'Female', 'Aurora, Naujan', '09305116718', 'Sofia Bahia', '09876543210', 'A+', 151.00, 42.00, 'BSED', '2024-11-09 01:44:12'),
-(221234, 'Chynna Alemania', 'Female', 'Aurora, Naujan', '09305116718', 'Sofia Bahia', '09876543210', 'A-', 151.00, 42.00, 'BSIT', '2024-11-09 01:47:19'),
-(220299, 'Alfia B. Aron', 'Male', 'Aurora, Naujan', '09305116718', 'Sofia Bahia', '09876543210', 'A+', 151.00, 42.00, 'BSIT', '2024-11-09 01:48:04'),
-(227890, 'Sarah Papa', 'Female', 'Aurora, Naujan', '09305116718', 'Sofia Bahia', '09876543210', 'A+', 151.00, 42.00, 'BSIT', '2024-11-09 09:43:02'),
-(224567, 'daryll Tupaz', 'Male', 'Aurora, Naujan', '09305116718', 'Sofia Bahia', '09876543210', 'A-', 151.00, 42.00, 'CAS', '2024-11-09 09:46:57');
+INSERT INTO `patients` (`patient_id`, `fullName`, `gender`, `address`, `contact`, `email`, `guardian`, `guardian_contact`, `bloodType`, `height`, `weight`, `department`, `createdAt`) VALUES
+(220298, 'Alfia A. Bahia', 'Female', 'Aurora, Naujan', '09305116718', 'alfia@gmail.com', 'Sofia Bahia', '09876543210', 'A+', 151.00, 42.00, 'BSED', '2024-11-09 01:44:12'),
+(221234, 'Chynna Alemania', 'Female', 'Aurora, Naujan', '09305116718', 'alemania@gmail.com', 'Sofia Bahia', '09876543210', 'A-', 151.00, 42.00, 'BSIT', '2024-11-09 01:47:19'),
+(220299, 'Alfia B. Aron', 'Male', 'Aurora, Naujan', '09305116718', 'aron@gmail.com', 'Sofia Bahia', '09876543210', 'A+', 151.00, 42.00, 'BSIT', '2024-11-09 01:48:04'),
+(227890, 'Sarah Papa', 'Female', 'Aurora, Naujan', '09305116718', 'papasarah@gmail.com', 'Sofia Bahia', '09876543210', 'A+', 151.00, 42.00, 'BSIT', '2024-11-09 09:43:02'),
+(220294, 'Darylld Tupaz', 'Male', 'dyan sabi sa tabi', '09065148161', 'hakd857@gmail.com', 'Felix Jr.', '0919362762', 'B+', 167.00, 56.00, 'BSIT', '2024-11-14 14:06:49'),
+(220279, 'Chynna Alemania Cabatay', 'Female', 'Silonay', '09117891311', 'chynnaalemania50@gmail.com', 'Felix Jr.', '0919362762', 'AB-', 167.00, 56.00, 'BSIT', '2024-11-14 13:19:01');
 
 -- --------------------------------------------------------
 
@@ -192,8 +187,8 @@ CREATE TABLE IF NOT EXISTS `services` (
 --
 
 INSERT INTO `services` (`service_id`, `date`, `service_type`, `patient_name`, `doctor_in_charge`, `medical_notes`, `blood_pressure`, `respiratory_rate`, `pulse_rate`, `temperature`, `medication`, `patient_id`) VALUES
-(5, '2024-11-09', 'check-up', 'Chynna Alemania', 'Dra. Custodio', 'jajakakls', '180/90', '85', '80', '43', 'sbna,s', 221234),
-(6, '2024-11-09', 'check-up', 'daryll Tupaz', 'Dra. Custodio', 'hjhk', '180/90', '85', '80', '43', 'hhhh', 224567),
+(5, '2024-11-09', 'check-up', 'Chynna Alemania', 'Dr. Custodio', 'jajakakls', '180/90', '85', '80', '43', 'sbna', 221234),
+(6, '2024-11-09', 'check-up', 'daryll Tupaz', 'Dr. Custodio', 'hjhk', '180/90', '85', '80', '43', 'hhhh', 224567),
 (4, '2024-11-09', 'check-up', 'Alfia A. Bahia', 'Dr. Custodio', 'nothing', '180/90', '85', '80', '43', 'nothing', 220298);
 
 -- --------------------------------------------------------
