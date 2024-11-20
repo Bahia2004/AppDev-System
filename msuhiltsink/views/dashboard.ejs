@@ -80,30 +80,34 @@
     </style>
 </head>
 <body>
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <img src="https://mmc-enrollment.minsu.edu.ph/img/logo.png" alt="MSU Logo">
-            <h4>MinSU HealthSync</h4>
-        </div>
-        <a href="/dashboard">Dashboard</a>
-        <a href="/inventory/list">Medicine Inventory</a>
-        <a href="/patient/list">Patient Records</a>
-        <a href="/service/list">Medical Services</a>
-        <a href="/history">History</a>
+   <!-- Sidebar -->
+   <div class="sidebar">
+    <div class="sidebar-header">
+        <img src="https://mmc-enrollment.minsu.edu.ph/img/logo.png" alt="MSU Logo">
+        <h4>MinSU HealthSync</h4>
     </div>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/patient/list">Patient Records</a>
+    <a href="/appointment">Appointment</a>
+    <a href="/inventory/list">Medicine Inventory</a>
+    <a href="/service/list">Medical Services</a>
+    <a href="/history">History</a>
+</div>
     
+    <!-- Main content area -->
     <div class="content">
-        <div class="container">
-            <h1>MSU HealthSync Dashboard</h1>
-            <div id="dynamic-content">
+        <h1>Dashboard</h1>
+        <!-- Dynamic content will be loaded here -->
+        <div id="dynamic-content">
+            <!-- This will be populated dynamically with content -->
+        </div>
+    </div>
 
-                <script>
-                    // Example of dynamically loading content (can be extended based on use case)
-                    $(document).ready(function() {
-                        $('#dynamic-content').html('<p>Welcome to the MSU HealthSync Dashboard. Use the sidebar to navigate through different sections of the clinic management system.</p>');
-                    });
-                </script>
-
+    <script>
+        // Example of dynamically loading content (can be extended based on use case)
+        $(document).ready(function() {
+            $('#dynamic-content').html('<p>Welcome to the MSU HealthSync Dashboard. Use the sidebar to navigate through different sections of the clinic management system.</p>');
+        });
+    </script>
 </body>
 </html>
