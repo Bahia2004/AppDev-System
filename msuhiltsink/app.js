@@ -7,6 +7,8 @@ const appointmentRoutes = require('./routes/appointmentRoutes');
 const patientRoutes = require('./routes/patientRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
 const historyRoutes = require('./routes/historyRoutes');
+const dashboardRoutes = require('./routes/dashboardRoutes');
+const reportRoutes = require('./routes/reportRoutes');
 
 const app = express();
 
@@ -72,8 +74,15 @@ app.get('/patient/history', (req, res) => {
   res.render('patient/history');
 });
 
+// Serve the report generation page
+app.get('/generate-report', (req, res) => {
+  res.render('generateReport');
+});
+
 // Routes
 app.use('/admin', adminRoutes);
+app.use('/dashboard', dashboardRoutes);
+app.use('/report', reportRoutes);
 app.use('/inventory', inventoryRoutes);
 app.use('/patient', patientRoutes);
 app.use('/service', serviceRoutes);
