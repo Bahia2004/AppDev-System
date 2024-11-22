@@ -11,151 +11,158 @@
       margin: 0;
       padding: 0;
       display: flex;
+      justify-content: center;
+      align-items: center;
       min-height: 100vh;
-      background: linear-gradient(135deg, #ffffff, #00bcd4);
+      background-image: url('https://minsu.edu.ph/template/images/slides/slides_1.jpg');
+      background-size: cover;
+      background-position: center;
       color: #333;
+    }
+
+    .container {
+      display: flex;
+      width: 90%;
+      max-width: 1000px;
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
     }
 
     .left-side {
       width: 50%;
+      background-image: url('https://static.vecteezy.com/system/resources/previews/035/725/457/original/health-care-and-life-insurance-concept-vector.jpg');
       background-size: cover;
       background-position: center;
-      height: 100vh;
+      height: auto;
     }
 
     .right-side {
       width: 50%;
+      padding: 25px;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 20px;
-      background-color: #f5f5f5;
+      background: #f5f5f5;
     }
 
     .signup-box {
-      background-color: white;
-      padding: 50px;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       width: 100%;
       max-width: 400px;
+      text-align: center;
     }
 
     h1 {
-      text-align: center;
       margin-bottom: 30px;
-      font-size: 28px;
-      color: #4caf50;
+      font-size: 32px;
+      color: #4CAF50;
     }
 
     label {
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       font-weight: bold;
-      color: #333;
+      text-align: left;
     }
 
     input[type="text"],
     input[type="email"],
     input[type="password"] {
       width: 100%;
-      padding: 12px;
+      padding: 12px 15px;
       margin-bottom: 20px;
-      border: 1px solid #ccc;
+      border: 1px solid #ddd;
       border-radius: 8px;
-      box-sizing: border-box;
-      transition: all 0.3s;
+      font-size: 16px;
+      transition: 0.3s ease;
     }
 
     input[type="text"]:focus,
     input[type="email"]:focus,
     input[type="password"]:focus {
-      border-color: #4caf50;
-      box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+      border-color: #4CAF50;
+      box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+      outline: none;
     }
 
     button {
-      background-color: #4caf50;
-      color: white;
+      width: 100%;
       padding: 14px;
+      font-size: 18px;
+      color: #fff;
+      background: #4CAF50;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      width: 100%;
-      font-size: 18px;
-      transition: background-color 0.3s;
+      transition: background-color 0.3s ease;
     }
 
     button:hover {
-      background-color: #45a049;
+      background: #45a049;
     }
 
     .already-account {
-      text-align: center;
       margin-top: 20px;
       font-size: 16px;
     }
 
     .already-account a {
-      color: #4caf50;
+      color: #4CAF50;
       text-decoration: none;
+      transition: color 0.3s ease;
     }
 
     .already-account a:hover {
+      color: #388E3C;
       text-decoration: underline;
     }
 
     @media (max-width: 768px) {
-
-      .left-side,
-      .right-side {
-        width: 100%;
+      .container {
+        flex-direction: column;
       }
 
       .left-side {
-        display: none;
-        /* Hide image on mobile */
+        width: 100%;
+        height: 200px;
       }
 
       .right-side {
-        padding: 40px;
-      }
-
-      .signup-box {
-        padding: 30px;
+        width: 100%;
+        padding: 20px;
       }
     }
   </style>
-  <script>
-    document.querySelector('.left-side').style.backgroundImage = "url('https://static.vecteezy.com/system/resources/previews/035/725/457/original/health-care-and-life-insurance-concept-vector.jpg')";
-  </script>
 </head>
 
 <body>
-  <!-- Left side with background image -->
-  <div class="left-side"
-    style="background-image: url('https://static.vecteezy.com/system/resources/previews/035/725/457/original/health-care-and-life-insurance-concept-vector.jpg');">
-  </div>
-  <!-- Right side with signup form inside a box -->
-  <div class="right-side">
-    <div class="signup-box">
+  <div class="container">
+    <!-- Left side with background image -->
+    <div class="left-side"></div>
+
+    <!-- Right side with signup form -->
+    <div class="right-side">
+      <div class="signup-box">
         <h1>Signup</h1>
         <form action="/admin/signup" method="POST">
-          <label for="username">Username:</label>
-          <input type="text" id="username" name="username" required>
-          
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required>
-          
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="password" required>
-          
+          <label for="username">Username</label>
+          <input type="text" name="username" id="username" placeholder="Enter your username" required>
+
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" placeholder="Enter your email" required>
+
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" placeholder="Enter your password" required>
+
           <button type="submit">Sign Up</button>
 
           <p class="already-account">
             Already have an account? <a href="/admin/login">Login here</a>
           </p>
         </form>
+      </div>
     </div>
   </div>
 </body>
