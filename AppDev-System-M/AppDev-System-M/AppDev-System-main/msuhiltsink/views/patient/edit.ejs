@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Patient - MSU HealthSync</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background-color: #e9f7f6; /* Light teal background for clinic feel */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 220px;
+            background-color: #2d3e3b; /* Dark green for sidebar */
+            padding-top: 20px;
+            padding-left: 15px;
+        }
+
+        .sidebar a {
+            padding: 15px;
+            text-align: left;
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .sidebar a:hover {
+            background-color: #4CAF50; /* Highlight color on hover */
+        }
+
+        .content {
+            margin-left: 240px;
+            padding: 30px;
+        }
+
+        .content h1 {
+            color: #2d3e3b; /* Matching color with sidebar */
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="text"], input[type="number"], select {
+            background-color: #f9f9f9;
+        }
+
+        button {
+            background-color: #00796b; /* Teal button */
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #004d40; /* Darker teal on hover */
+        }
+
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <img src="https://mmc-enrollment.minsu.edu.ph/img/logo.png" alt="MSU Logo" class="img-fluid mb-3" style="max-width: 80%; padding-left: 15px;">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/patient/list">Patient Records</a>
+        <a href="/appointment">Appointment</a>
+        <a href="/inventory/list">Medicine Inventory</a>
+        <a href="/service/list">Medical Services</a>
+        <a href="/history">History</a>
+    </div>
+
+    <!-- Main content area -->
+    <div class="content">
+        <h1>Edit Patient</h1>
+        <form action="/patient/edit/<%= patient.patient_id %>" method="POST">
+            <input type="hidden" name="patient_id" value="<%= patient.patient_id %>">
+
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" value="<%= patient.fullName %>" required>
+
+            <label for="contact">Contact:</label>
+            <input type="text" id="contact" name="contact" value="<%= patient.contact %>" required>
+            
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" placeholder="Email Address" required>
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" value="<%= patient.address %>">
+
+            <label for="department">Department:</label>
+            <input type="text" id="department" name="department" value="<%= patient.department %>">
+
+            <label for="bloodType">Blood Type:</label>
+            <select id="bloodType" name="bloodType" required>
+                <option value="">Select Blood Type</option>
+                <option value="A+" <%= patient.bloodType === 'A+' ? 'selected' : '' %>>A+</option>
+                <option value="A-" <%= patient.bloodType === 'A-' ? 'selected' : '' %>>A-</option>
+                <option value="B+" <%= patient.bloodType === 'B+' ? 'selected' : '' %>>B+</option>
+                <option value="B-" <%= patient.bloodType === 'B-' ? 'selected' : '' %>>B-</option>
+                <option value="AB+" <%= patient.bloodType === 'AB+' ? 'selected' : '' %>>AB+</option>
+                <option value="AB-" <%= patient.bloodType === 'AB-' ? 'selected' : '' %>>AB-</option>
+                <option value="O+" <%= patient.bloodType === 'O+' ? 'selected' : '' %>>O+</option>
+                <option value="O-" <%= patient.bloodType === 'O-' ? 'selected' : '' %>>O-</option>
+            </select>
+
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender">
+                <option value="">Select Gender</option>
+                <option value="Male" <%= patient.gender === 'Male' ? 'selected' : '' %>>Male</option>
+                <option value="Female" <%= patient.gender === 'Female' ? 'selected' : '' %>>Female</option>
+                <option value="Other" <%= patient.gender === 'Other' ? 'selected' : '' %>>Other</option>
+            </select>
+
+            <label for="guardian">Guardian's Name:</label>
+            <input type="text" id="guardian" name="guardian" value="<%= patient.guardian %>">
+
+            <label for="guardian_contact">Guardian's Contact:</label>
+            <input type="text" id="guardian_contact" name="guardian_contact" value="<%= patient.guardian_contact %>">
+
+            <label for="height">Height (cm):</label>
+            <input type="number" id="height" name="height" value="<%= patient.height %>" step="0.1" min="0">
+
+            <label for="weight">Weight (kg):</label>
+            <input type="number" id="weight" name="weight" value="<%= patient.weight %>" step="0.1" min="0">
+
+            <button type="submit">Update Patient</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>MSU HealthSync - Clinic Management System</p>
+    </footer>
+</body>
+</html>

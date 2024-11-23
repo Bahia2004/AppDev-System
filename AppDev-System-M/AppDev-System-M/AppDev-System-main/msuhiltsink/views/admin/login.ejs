@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #6c63ff, #00bcd4);
+            color: #333;
+        }
+
+        .left-side {
+            width: 50%;
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+        }
+
+        .right-side {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .login-box {
+            background-color: white;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+            color: #4CAF50;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .create-account {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .create-account a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .create-account a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+
+            .left-side,
+            .right-side {
+                width: 100%;
+            }
+
+            .left-side {
+                display: none;
+                /* Hide image on mobile */
+            }
+
+            .right-side {
+                padding: 40px;
+            }
+
+            .login-box {
+                padding: 30px;
+            }
+        }
+    </style>
+      <script>
+        document.querySelector('.left-side').style.backgroundImage = "url('https://static.vecteezy.com/system/resources/previews/035/725/457/original/health-care-and-life-insurance-concept-vector.jpg')";
+      </script>    
+</head>
+
+<body>
+
+    <!-- Left side with background image -->
+    <div class="left-side"
+        style="background-image: url('https://static.vecteezy.com/system/resources/previews/035/725/457/original/health-care-and-life-insurance-concept-vector.jpg');">
+    </div>
+    <!-- Right side with login form inside a box -->
+    <div class="right-side">
+        <div class="login-box">
+            <h1>Login</h1>
+            <form action="admin/login" method="POST">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" required>
+
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" required>
+
+                <button type="submit">Login</button>
+                <p class="create-account">Don't have an account? <a href="/admin/signup">Create one</a></p>
+            </form>
+        </div>
+    </div>
+    
+
+</body>
+
+</html>
