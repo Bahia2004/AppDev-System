@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - MSU HealthSync</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> 
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
         body {
-            background-color: #f4f4f9;
-            font-family: Arial, sans-serif;
+            background-color: #e9f7f6; /* Light teal background */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         .sidebar {
             position: fixed;
@@ -21,8 +22,9 @@
             left: 0;
             height: 100%;
             width: 220px;
-            background-color: #355E3B;
+            background-color: #2d3e3b; /* Dark green for sidebar */
             padding-top: 20px;
+            padding-left: 15px;
         }
         .sidebar a {
             padding: 15px;
@@ -31,42 +33,273 @@
             color: white;
             text-decoration: none;
             font-weight: bold;
-            cursor: pointer;
+            margin-bottom: 10px;
         }
         .sidebar a:hover {
-            background-color: #4CAF50;
+            background-color: #4CAF50; /* Highlight color on hover */
         }
         .content {
             margin-left: 240px;
-            padding: 20px;
+            padding: 30px;
         }
         .content h1 {
-            color: #333;
+            color: #2d3e3b; /* Matching color with sidebar */
+            font-size: 36px;
+            margin-bottom: 20px;
         }
         footer {
-            margin-top: 20px;
+            margin-top: 30px;
             text-align: center;
             font-size: 14px;
-            color: #666;
+            color: #888;
+        }
+        footer p {
+            margin: 0;
+        }
+        #dynamic-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .charts-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .chart {
+            width: 100%;
+            max-width: 100%; /* Ensure that the chart doesn't exceed the container's width */
+            height: auto; /* Let the height adjust automatically */
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .chart {
+                width: 100%;
+                height: 300px; /* Ensure it takes up the available space without overflowing */
+                margin-bottom: 20px;
+            }
+        }
+        
+        .report-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .report-btn:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
-        <img src="https://mmc-enrollment.minsu.edu.ph/img/logo.png" alt="MSU Logo" class="img-fluid mb-3" style="padding-left: 15px;">
-        <a href="">Dashboard</a>
-        <a href="/patients">Patient Records</a>
-        <a href="/medicines">Medicine Inventory</a>
-        <a href="/services">Medical Services</a>
+        <img src="https://mmc-enrollment.minsu.edu.ph/img/logo.png" alt="MSU Logo" class="img-fluid mb-3">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/patient/list">Patient Records</a>
+        <a href="/appointment">Appointment</a>
+        <a href="/inventory/list">Medicine Inventory</a>
+        <a href="/service/list">Medical Services</a>
         <a href="/history">History</a>
     </div>
     
     <!-- Main content area -->
     <div class="content">
+        <h1>Dashboard</h1>
+
+        <!-- Button to generate report -->
+        <button id="generateReportBtn" class="report-btn">Generate Report</button>
+        
+        <!-- Dynamic content will be loaded here -->
         <div id="dynamic-content">
+            <div class="charts-container">
+                <div class="chart">
+                    <canvas id="appointmentsChart"></canvas>
+                </div>
+                <div class="chart">
+                    <canvas id="departmentChart"></canvas>
+                </div>
+                <div class="chart">
+                    <canvas id="inventoryChart"></canvas>
+                </div>
+                <div class="chart">
+                    <canvas id="satisfactionChart"></canvas>
+                </div>
+            </div>
         </div>
     </div>
-       
+
+    <!-- Footer -->
+    <footer>
+        <p>MSU HealthSync - Clinic Management System</p>
+    </footer>
+
+    <script>
+        $(document).ready(function () {
+            // Fetch data for charts
+            fetch('/dashboard/data')
+                .then(response => response.json())
+                .then(data => {
+                    // Render charts
+                    renderAppointmentChart(data.appointmentStats);
+                    renderDepartmentChart(data.department);
+                    renderInventoryChart(data.inventoryUsage);
+                    renderSatisfactionChart(data.satisfactionData); // Add this line to render the satisfaction chart
+                })
+                .catch(error => console.error('Error fetching dashboard data:', error));
+    
+            // Handle report generation
+            $('#generateReportBtn').on('click', function () {
+                $.ajax({
+                    url: '/report/generate', // The route for generating the report
+                    method: 'GET',
+                    xhrFields: {
+                        responseType: 'blob', // Ensure binary data is handled
+                    },
+                    success: function (data) {
+                        // Convert response into a downloadable file
+                        const blob = new Blob([data], { type: 'application/pdf' });
+                        const link = document.createElement('a');
+                        link.href = URL.createObjectURL(blob);
+                        link.download = 'MSU_HealthSync_Report.pdf';
+                        document.body.appendChild(link); // Append link to body for Firefox
+                        link.click(); // Trigger the download
+                        document.body.removeChild(link); // Clean up the DOM
+                    },
+                    error: function (err) {
+                        console.error('Error generating report:', err);
+                        alert('Failed to generate the report. Please try again.');
+                    },
+                });
+            });
+        });
+    
+        function renderAppointmentChart(stats) {
+            const ctx = document.getElementById('appointmentsChart').getContext('2d');
+            const labels = stats.map(stat => stat.status);
+            const values = stats.map(stat => stat.count);
+        
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: ['#4CAF50', '#FFC107', '#F44336']
+                    }]
+                },
+                options: {
+                    responsive: true, // Ensure the chart is responsive
+                    maintainAspectRatio: false // Allow the chart to resize freely within its container
+                }
+            });
+        }
+        
+        function renderDepartmentChart(stats) {
+            const ctx = document.getElementById('departmentChart').getContext('2d');
+            const labels = stats.map(stat => stat.department);
+            const values = stats.map(stat => stat.count);
+        
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Department',
+                        data: values,
+                        backgroundColor: ['#42A5F5', '#EC407A', '#6A669D', '#89A8B2', '#B1C29E', '#80C4E9', '#1F4529', '#AA5486', '#1A1A1D']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            ticks: { beginAtZero: true }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function renderInventoryChart(stats) {
+            const ctx = document.getElementById('inventoryChart').getContext('2d');
+            const labels = stats.map(stat => stat.item_name);
+            const values = stats.map(stat => stat.quantity);
+        
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Inventory Usage',
+                        data: values,
+                        borderColor: '#4CAF50',
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        }
+        
+        function renderSatisfactionChart(satisfactionData) {
+            const ctx = document.getElementById('satisfactionChart').getContext('2d');
+            const labels = Object.keys(satisfactionData);
+            const values = Object.values(satisfactionData);
+        
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Number of Respondents',
+                        data: values,
+                        backgroundColor: [
+                            '#4CAF50', // Very Satisfied - Green
+                            '#8BC34A', // Satisfied - Light Green
+                            '#FFC107', // Neutral - Yellow
+                            '#FF5722', // Dissatisfied - Orange
+                            '#F44336'  // Very Dissatisfied - Red
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: { display: false },
+                        title: {
+                            display: true,
+                            text: 'Respondent Satisfaction Levels'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Number of Respondents' }
+                        },
+                        y: {
+                            title: { display: true, text: 'Satisfaction Levels' }
+                        }
+                    }
+                }
+            });
+        }
+        
+    </script>
+    
 </body>
 </html>
