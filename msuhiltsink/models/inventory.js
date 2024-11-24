@@ -24,7 +24,8 @@ const Inventory = {
     return result;
   },
 
-  addQuantity: async (id, quantityToAdd) => {
+
+  addQuantity: async (id, quantityChange) => {
     const query = `
       UPDATE inventory 
       SET quantity = quantity + ?, 
@@ -32,9 +33,10 @@ const Inventory = {
           updated_at = CURRENT_TIMESTAMP
       WHERE inventory_id = ?
     `;
-    const [result] = await db.execute(query, [quantityToAdd, quantityToAdd, id]);
+    const [result] = await db.execute(query, [quantityChange, quantityChange, id]);
     return result;
   },
+
 
   getItemHistory: async (id) => {
     const query = `

@@ -136,10 +136,10 @@
             <h1 class="text-center">Add Quantity for <%= item.item_name %></h1>
             <form action="/inventory/add-quantity/<%= item.inventory_id %>" method="POST">
                 <div class="form-group">
-                    <label for="quantity_to_add">Quantity to Add</label>
-                    <input type="number" class="form-control" id="quantity_to_add" name="quantity_to_add" required min="1">
+                    <label for="quantity_to_add">Quantity Change</label>
+                    <input type="number" class="form-control" id="quantity_to_add" name="quantity_to_add" required placeholder="Add quantity or Dicrease quantity ">
                 </div>
-                <button type="submit" class="btn btn-add btn-block">Add Quantity</button>
+                <button type="submit" class="btn btn-primary btn-block">Update Quantity</button>
             </form>
             <a href="/inventory/list" class="btn btn-back btn-block mt-3">Back to Inventory</a>
         </div>

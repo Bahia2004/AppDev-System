@@ -83,24 +83,36 @@ exports.addQuantityForm = async (req, res) => {
   const { quantity_to_add } = req.body;
 
   try {
-    const quantityToAdd = parseInt(quantity_to_add, 10);
+    const quantityChange = parseInt(quantity_to_add, 10);
 
-    if (isNaN(quantityToAdd) || quantityToAdd <= 0) {
-      return res.status(400).send('Invalid quantity to add');
+    if (isNaN(quantityChange) || quantityChange === 0) {
+      return res.status(400).send('Invalid quantity value. Must be a non-zero number.');
     }
 
-    // Log the update in memory before updating the DB
-    memoryStorage.logInventoryUpdate(id, quantityToAdd);
+    const item = await Inventory.findByPk(id);
+    if (!item) {
+      return res.status(404).send('Item not found');
+    }
+
+    const newQuantity = item.quantity + quantityChange;
+
+    if (newQuantity < 0) {
+      return res.status(400).send('Insufficient stock to subtract this quantity.');
+    }
+
+    // Log the update in memory (positive for addition, negative for subtraction)
+    memoryStorage.logInventoryUpdate(id, quantityChange);
 
     // Update the quantity in the database
-    await Inventory.addQuantity(id, quantityToAdd);
+    await Inventory.addQuantity(id, quantityChange);
 
     res.redirect('/inventory/list');
   } catch (error) {
-    console.error('Error adding quantity:', error);
-    res.status(500).send('Error adding quantity');
+    console.error('Error updating quantity:', error);
+    res.status(500).send('Error updating quantity');
   }
 };
+
 
 exports.getItemHistory = async (req, res) => {
   const { id } = req.params;
