@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap and Google Fonts -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -18,47 +19,23 @@
             padding: 0;
         }
 
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 240px;
-            background-color: #004d40;
-            color: white;
-            padding-top: 20px;
-        }
-
-        .sidebar-header {
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            margin-bottom: 20px;
-        }
-
-        .sidebar-header img {
-            width: 50px;
-            height: 50px;
-        }
-
-        .sidebar-header h4 {
-            margin-left: 10px;
-            font-weight: 700;
-            font-size: 1rem;
-        }
-
+        .sidebar { position: fixed; top: 0; left: 0; height: 100%; width: 250px; background-color: #004d40; padding-top: 20px; color: white; }
+        .sidebar-header { display: flex; align-items: center; padding: 0 20px; margin-bottom: 30px; }
+        .sidebar-header img { width: 60px; height: 60px; }
+        .sidebar-header h4 { margin-left: 15px; font-weight: 700; font-size: 1.2rem; }
         .sidebar a {
             display: block;
-            padding: 8px 20px;
+            padding: 15px 20px; /* Increased padding for better spacing */
             color: white;
             text-decoration: none;
-            font-size: 0.85rem;
+            margin-bottom: 10px; /* Add margin to create space between links */
         }
-
+        
         .sidebar a:hover {
             background-color: #00695c;
             border-left: 5px solid #4caf50;
         }
+        
 
         .content {
             margin-left: 240px;
@@ -106,7 +83,7 @@
         }
 
         button {
-            background-color: #cfb53b;
+            background-color:#21421e;
             color: white;
             border: none;
             padding: 8px;
@@ -117,36 +94,36 @@
         }
 
         button:hover {
-            background-color: #b29630;
+            background-color:#2a5c27;
         }
         .btn-book {
-        background-color: #9b870c;
+        background-color:#21421e;
         color: white;
         border: none;
        }
 
        .btn-book:hover {
-        background-color: #cfb53b;
+        background-color:#2a5c27;
        }
 
         .btn-reschedule {
-            background-color: #cfb53b;
+            background-color:#21421e;
             color: white;
             border: none;
         }
 
         .btn-reschedule:hover {
-            background-color: #b29630;
+            background-color: #2a5c27;
         }
 
         .btn-cancel {
-            background-color: #cfb53b;
+            background-color:#21421e;
             color: white;
             border: none;
         }
 
         .btn-cancel:hover {
-            background-color: #b29630;
+            background-color: #2a5c27;
         }
 
         .appointment-card {
@@ -167,16 +144,18 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-header">
-            <img src="https://mmc-enrollment.minsu.edu.ph/img/logo.png" alt="MSU Logo">
-            <h4>MinSU HealthSync</h4>
+          <img src="https://mmc-enrollment.minsu.edu.ph/img/logo.png" alt="MSU Logo">
+          <h4>MinSU HealthSync</h4>
         </div>
-        <a href="/dashboard">Dashboard</a>
-        <a href="/patient/list">Patient Records</a>
-        <a href="/appointment">Appointment</a>
-        <a href="/inventory/list">Medicine Inventory</a>
-        <a href="/service/list">Medical Services</a>
-        <a href="/history">History</a>
-    </div>
+        <a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        <a href="/patient/list"><i class="fas fa-users"></i> Patient Records</a>
+        <a href="/appointment"><i class="fas fa-calendar-check"></i> Appointment</a>
+        <a href="/inventory/list"><i class="fas fa-pills"></i> Medicine Inventory</a>
+        <a href="/service/list"><i class="fas fa-stethoscope"></i> Medical Services</a>
+        <a href="/history"><i class="fas fa-history"></i> History</a>
+      </div>
+      
+    
 
     <!-- Main content -->
     <div class="content">
