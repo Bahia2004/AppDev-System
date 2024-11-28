@@ -22,8 +22,26 @@ async function bookAppointment(req, res) {
         const patientEmail = await Appointment.getPatientEmail(patient_id);
 
         // Send booking confirmation email dynamically
-        const subject = 'Appointment Confirmation';
-        const text = `Your appointment has been successfully booked for ${appointment_date}.`;
+        const subject = 'Appointment Confirmation - MinSU HealthSync';
+        const text = `
+
+Thank you for choosing MinSU HealthSync. 
+
+We are pleased to confirm that your appointment has been successfully booked:
+
+Date and Time: ${appointment_date}  
+Clinic Location: Near Library
+
+Please arrive at least 10 minutes early to complete any necessary preparations. If you have any questions or need assistance, feel free to contact us at 09065148161 or aash100227@gmail.com.
+
+We look forward to serving you.
+
+Warm regards,  
+MinSU HealthSync Team.
+
+
+👌✌️✍️🤝We would Love to Hear Your Feedback!👌✌️✍️🤝
+https://docs.google.com/forms/d/e/1FAIpQLSeTt5aKlkfxnF89SI5-I2fPOytJwdGvzYFBSdfB2XPL-wT6lg/viewform?fbclid=IwY2xjawGtgP5leHRuA2FlbQIxMAABHUnjgDzPT4aJQdbD2k4F1UIX-LEeu50REGnB7pKQJbClKUzI5jau9Ft0Dg_aem_MogqQLix3Nipc72-nYIjpQ`;
         await sendEmail(patientEmail, subject, text);  // Dynamically passing email and content
 
         res.redirect('/appointment');  // Redirect to appointments page
@@ -43,8 +61,21 @@ async function rescheduleAppointment(req, res) {
         const appointmentDetails = await Appointment.getAppointmentDetails(appointment_id);
         const patientEmail = await Appointment.getPatientEmail(appointmentDetails.patient_id);
 
-        const subject = 'Appointment Rescheduled';
-        const text = `Your appointment has been rescheduled to ${new_date}.`;
+        const subject = 'Appointment Rescheduled - MinSU Hiltsink';
+        const text = `Your appointment with MinSU Hiltsink has been rescheduled successfully:
+
+New Date and Time: ${new_date}  
+Clinic Location: Near Library
+
+Please let us know if you need further adjustments or have any questions. You can reach us at 09065148161  or aash100227@gmail.com.
+
+Thank you for your understanding and continued trust.
+
+Best regards,  
+MinSU HealthSync Team
+
+👌✌️✍️🤝We would Love to Hear Your Feedback!👌✌️✍️🤝
+https://docs.google.com/forms/d/e/1FAIpQLSeTt5aKlkfxnF89SI5-I2fPOytJwdGvzYFBSdfB2XPL-wT6lg/viewform?fbclid=IwY2xjawGtgP5leHRuA2FlbQIxMAABHUnjgDzPT4aJQdbD2k4F1UIX-LEeu50REGnB7pKQJbClKUzI5jau9Ft0Dg_aem_MogqQLix3Nipc72-nYIjpQ`;
         await sendEmail(patientEmail, subject, text);
 
         res.redirect('/appointment');
@@ -65,12 +96,12 @@ async function cancelAppointment(req, res) {
 
         // Fetch appointment details (and patient_id) using appointment_id
         const appointment = await Appointment.getAppointmentDetails(appointment_id);
-        
+
         if (!appointment) {
             return res.status(404).json({ error: 'Appointment not found' });
         }
 
-        const patient_id = appointment.patient_id; // Ensure this field is correct
+        const { patient_id, appointment_date } = appointment; // Destructure appointment_date and patient_id
 
         // Proceed with canceling the appointment
         await Appointment.cancelAppointment(appointment_id);
@@ -79,8 +110,23 @@ async function cancelAppointment(req, res) {
         const patientEmail = await Appointment.getPatientEmail(patient_id);
 
         // Send email notification for cancellation
-        const subject = 'Appointment Canceled';
-        const text = 'Your appointment has been canceled.';
+        const subject = 'Appointment Canceled - MinSU Hiltsink';
+        const text = `
+We regret to inform you that your appointment with MinSU Hiltsink has been canceled:
+
+Original Date and Time: ${appointment_date}  
+
+If you would like to reschedule, please visit our website or contact us directly at 09065148161 or aash100227@gmail.com.
+
+We apologize for any inconvenience this may have caused. Thank you for your understanding.
+
+Kind regards,  
+MinSU HealthSync Team 
+
+
+👌✌️✍️🤝We would Love to Hear Your Feedback!👌✌️✍️🤝
+https://docs.google.com/forms/d/e/1FAIpQLSeTt5aKlkfxnF89SI5-I2fPOytJwdGvzYFBSdfB2XPL-wT6lg/viewform?fbclid=IwY2xjawGtgP5leHRuA2FlbQIxMAABHUnjgDzPT4aJQdbD2k4F1UIX-LEeu50REGnB7pKQJbClKUzI5jau9Ft0Dg_aem_MogqQLix3Nipc72-nYIjpQ`
+;
         await sendEmail(patientEmail, subject, text);
         res.redirect('/appointment');
 
