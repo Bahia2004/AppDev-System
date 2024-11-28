@@ -1,4 +1,3 @@
-// models/Patient.js
 const db = require('../config/db'); // Database connection
 
 class Patient {
@@ -13,20 +12,20 @@ class Patient {
     }
 
     static async create(patientData) {
-        const { patient_id, address, bloodType, contact, department, fullName, gender, guardian, guardian_contact, height, weight } = patientData;
+        const { patient_id, address, email, bloodType, contact, department, fullName, gender, guardian, guardian_contact, height, weight } = patientData;
         // Check if patient_id is provided before insertion
         if (!patient_id) {
             throw new Error('Patient ID is required');
         }
 
         await db.query(
-            'INSERT INTO patients (patient_id, address, bloodType, contact, department, fullName, gender, guardian, guardian_contact, height, weight) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-            [patient_id, address, bloodType, contact, department, fullName, gender, guardian, guardian_contact, height, weight]
+            'INSERT INTO patients (patient_id, address, email, bloodType, contact, department, fullName, gender, guardian, guardian_contact, height, weight) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [patient_id, address, email, bloodType, contact, department, fullName, gender, guardian, guardian_contact, height, weight]
         );
     }
 
     static async update(patient_id, patientData) {
-        const { address, bloodType, contact, department, fullName, gender, guardian, guardian_contact, height, weight } = patientData;
+        const { address, email, bloodType, contact, department, fullName, gender, guardian, guardian_contact, height, weight } = patientData;
 
         // Check if patient_id is provided before updating
         if (!patient_id) {
@@ -34,8 +33,8 @@ class Patient {
         }
 
         await db.query(
-            'UPDATE patients SET address = ?, bloodType = ?, contact = ?, department = ?, fullName = ?, gender = ?, guardian = ?, guardian_contact = ?, height = ?, weight = ? WHERE patient_id = ?',
-            [address, bloodType, contact, department, fullName, gender, guardian, guardian_contact, height, weight, patient_id]
+            'UPDATE patients SET address = ?, email = ?, bloodType = ?, contact = ?, department = ?, fullName = ?, gender = ?, guardian = ?, guardian_contact = ?, height = ?, weight = ? WHERE patient_id = ?',
+            [address, email, bloodType, contact, department, fullName, gender, guardian, guardian_contact, height, weight, patient_id]
         );
     }
     static async getAllNames() {
