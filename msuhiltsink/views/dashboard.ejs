@@ -10,33 +10,64 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 
     <style>
         body {
-            background-color: #e9f7f6; /* Light teal background */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
         }
+
         .sidebar {
             position: fixed;
             top: 0;
             left: 0;
             height: 100%;
-            width: 220px;
-            background-color: #2d3e3b; /* Dark green for sidebar */
+            width: 250px;
+            background-color: #004d40;
             padding-top: 20px;
-            padding-left: 15px;
+            color: white;
         }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            margin-bottom: 30px;
+        }
+
+        .sidebar-header img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .sidebar-header h4 {
+            margin-left: 15px;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
         .sidebar a {
-            padding: 15px;
-            text-align: left;
-            display: block;
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
             color: white;
             text-decoration: none;
-            font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 25px; /* Adds spacing between links */
         }
+        
         .sidebar a:hover {
-            background-color: #4CAF50; /* Highlight color on hover */
+            background-color: #00695c;
+            border-left: 5px solid #4caf50;
+        }
+        
+        .sidebar a i {
+            margin-right: 10px; /* Space between icon and text */
+            font-size: 18px;
         }
         .content {
             margin-left: 240px;
@@ -44,8 +75,9 @@
         }
         .content h1 {
             color: #2d3e3b; /* Matching color with sidebar */
-            font-size: 36px;
+            font-size: 24px; /* Reduced font size */
             margin-bottom: 20px;
+            font-weight: 500; /* Medium font weight */
         }
         footer {
             margin-top: 30px;
@@ -63,31 +95,31 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         .charts-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two columns layout */
+            gap: 20px; /* Space between charts */
         }
         .chart {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 100%; /* Ensure that the chart doesn't exceed the container's width */
-            height: auto; /* Let the height adjust automatically */
-            margin-bottom: 30px;
+            height: 300px;
         }
-        
         @media (max-width: 768px) {
-            .chart {
-                width: 100%;
-                height: 300px; /* Ensure it takes up the available space without overflowing */
-                margin-bottom: 20px;
+            .charts-container {
+                grid-template-columns: 1fr; /* Single column for smaller screens */
             }
         }
+
         
         .report-btn {
             position: fixed;
             top: 20px;
             right: 20px;
             padding: 10px 20px;
-            background-color: #4CAF50;
+            background-color: #00695c; /* Updated button color */
             color: white;
             font-weight: bold;
             border: none;
@@ -96,20 +128,23 @@
             z-index: 10;
         }
         .report-btn:hover {
-            background-color: #45a049;
+            background-color: #004d40; /* Darker shade of the button color */
         }
     </style>
 </head>
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
-        <img src="https://mmc-enrollment.minsu.edu.ph/img/logo.png" alt="MSU Logo" class="img-fluid mb-3">
-        <a href="/dashboard">Dashboard</a>
-        <a href="/patient/list">Patient Records</a>
-        <a href="/appointment">Appointment</a>
-        <a href="/inventory/list">Medicine Inventory</a>
-        <a href="/service/list">Medical Services</a>
-        <a href="/history">History</a>
+        <div class="sidebar-header">
+            <img src="https://mmc-enrollment.minsu.edu.ph/img/logo.png" alt="MSU Logo">
+            <h4>MinSU HealthSync</h4>
+        </div>
+        <a href="/dashboard"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="/patient/list"><i class="fas fa-users"></i> Patient Records</a>
+        <a href="/appointment"><i class="fas fa-calendar-alt"></i> Appointment</a>
+        <a href="/inventory/list"><i class="fas fa-pills"></i> Medicine Inventory</a>
+        <a href="/service/list"><i class="fas fa-briefcase-medical"></i> Medical Services</a>
+        <a href="/history"><i class="fas fa-history"></i> History</a>
     </div>
     
     <!-- Main content area -->
@@ -298,8 +333,6 @@
                 }
             });
         }
-        
     </script>
-    
 </body>
 </html>
