@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Clinic Website</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts for improved typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Lato:wght@400;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* General body and text styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-image: url('https://minsu.edu.ph/template/images/slides/slides_1.jpg');
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Section */
+        header {
+            background: #014421; /* Updated color */
+            color: white;
+            padding: 5px 0;
+        }
+
+        /* Logo and Title - Left-Aligned */
+        header .logo-title {
+            display: flex;
+            align-items: center;
+            padding-left: 20px; /* Align left with padding */
+        }
+
+        header img {
+            width: 30px; /* Smaller logo size */
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        header h1 {
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            font-size: 1.3rem; /* Smaller title font size */
+            margin-bottom: 0;
+        }
+
+        /* Navbar styles */
+        nav a {
+            color: white !important;
+            text-decoration: none;
+            padding: 8px 15px;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #f8f9fa;
+        }
+
+        /* Adjust Navbar to ensure proper spacing */
+        .navbar-nav {
+            padding-right: 20px; /* Add some space from the right edge */
+        }
+
+        /* Center the links */
+        .navbar-nav {
+            justify-content: center; /* Center the links */
+            width: 100%;
+        }
+
+        /* Main Section */
+        main {
+            padding: 40px 0;
+            flex-grow: 1; /* Ensures main content grows to fill available space */
+            color: white; /* Change text color to white */
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: white; /* Change heading color to white */
+        }
+
+        p.lead {
+            font-size: 1rem;
+            color: white; /* Change paragraph color to white */
+        }
+
+        /* Button Styling */
+        .btn-light-grey {
+            background-color: #d3d3d3; /* Light grey color */
+            border: none;
+            font-weight: 500;
+        }
+
+        .btn-light-grey:hover {
+            background-color: #a9a9a9; /* Darker grey on hover */
+        }
+
+        /* Image Styling */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer Section */
+        footer {
+            background: #014421; /* Updated color */
+            color: white;
+            padding: 5px 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Footer Text */
+        footer p {
+            margin: 0;
+            font-size: 0.8rem; /* Smaller font size */
+        }
+
+        footer p:hover {
+            color: #f8f9fa;
+            cursor: pointer;
+        }
+
+        /* Media Queries for mobile responsiveness */
+        @media (max-width: 767px) {
+            header h1 {
+                font-size: 1.6rem; /* Smaller title font size on mobile */
+            }
+
+            nav a {
+                font-size: 0.9rem; /* Smaller font size for links on mobile */
+            }
+
+            .col-lg-6 {
+                margin-bottom: 20px;
+            }
+
+            h2 {
+                font-size: 1.8rem; /* Smaller font size for subheading on mobile */
+            }
+
+            p.lead {
+                font-size: 0.9rem; /* Smaller font size for mobile */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header class="d-flex justify-content-between align-items-center py-3" style="background-color: #014421;">
+        <div class="container d-flex justify-content-start align-items-center">
+            <!-- Logo and Title - Left-Aligned -->
+            <div class="logo-title">
+                <img src="https://minsu.edu.ph/template/images/logo.png" alt="Logo" class="img-fluid">
+                <h1 class="h4 font-weight-bold text-white mb-0">MinSU HealthSync</h1>
+            </div>
+        </div>
+
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-white" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/about">About</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/services">Services</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Section -->
+    <main class="container my-5">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2 class="font-weight-bold">Your Health, Our Priority</h2>
+                <p class="lead">Welcome to our clinic, where we offer top-notch healthcare services to ensure your well-being. Our team of professionals is committed to providing you with personalized care to meet all your health needs.</p>
+                <a href="/services" class="btn btn-light-grey btn-lg mt-3">Explore Our Services</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="text-white text-center py-4">
+        <p>&copy; 2024 MinSU HealthSync | All Rights Reserved</p>
+    </footer>
+
+    <!-- Include Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

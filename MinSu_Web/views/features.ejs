@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - MinSU HealthSync</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts for improved typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-image: url('https://minsu.edu.ph/template/images/slides/slides_1.jpg');
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Section */
+        header {
+            background: #014421;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+        }
+
+        header img {
+            width: 45px;
+            height: 45px;
+            margin-right: 10px;
+        }
+
+        header h1 {
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #d3d3d3;
+        }
+
+        main {
+            padding: 40px;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        /* Feature Containers */
+        .feature-container {
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            height: 250px;
+            width: 250px;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-container .feature-icons i {
+            font-size: 3rem;
+            color: #014421;
+            transition: color 0.3s ease;
+        }
+
+        .feature-container .feature-icons i:hover {
+            color: #006633;
+        }
+
+        .feature-container p {
+            margin-top: 10px;
+            font-weight: 400;
+            color: #666666; /* Lighter gray color */
+            font-size: 0.9rem; /* Reduced font size */
+            font-family: 'Arial', sans-serif; /* Changed font style */
+        }
+
+        /* Footer Styling */
+        footer {
+            background: #014421;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        footer p:hover {
+            color: #f8f9fa;
+            cursor: pointer;
+        }
+
+        /* Responsive footer */
+        footer p:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header class="d-flex justify-content-between align-items-center">
+        <div class="logo-title">
+            <img src="https://minsu.edu.ph/template/images/logo.png" alt="Logo">
+            <h1>MinSU HealthSync</h1>
+        </div>
+        <!-- Navigation Bar -->
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/features">Features</a>
+            <a href="/contact">Contact</a>
+            <a href="/services">Services</a>
+        </nav>
+    </header>
+
+    <!-- Main Content Section -->
+    <main>
+        <h2>Our Key Features</h2>
+
+        <!-- Feature Containers -->
+        <div class="container">
+            <div class="row">
+                <!-- Patient Information -->
+                <div class="col-md-4 feature-container">
+                    <div class="feature-icons">
+                        <i class="bi bi-person-badge"></i>
+                        <p><strong>Patient Information</strong><br>Manage and store patient data securely for quick access.</p>
+                    </div>
+                </div>
+
+                <!-- Appointments -->
+                <div class="col-md-4 feature-container">
+                    <div class="feature-icons">
+                        <i class="bi bi-calendar-check"></i>
+                        <p><strong>Appointments</strong><br>Schedule and track patient appointments with ease.</p>
+                    </div>
+                </div>
+
+                <!-- Medical Services -->
+                <div class="col-md-4 feature-container">
+                    <div class="feature-icons">
+                        <i class="bi bi-hospital"></i>
+                        <p><strong>Medical Services</strong><br>Access a wide range of medical services and consultations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Admission -->
+                <div class="col-md-4 feature-container">
+                    <div class="feature-icons">
+                        <i class="bi bi-person-plus"></i>
+                        <p><strong>Admission</strong><br>Simplified patient admission process for smooth workflows.</p>
+                    </div>
+                </div>
+
+                <!-- Reports -->
+                <div class="col-md-4 feature-container">
+                    <div class="feature-icons">
+                        <i class="bi bi-file-earmark-medical"></i>
+                        <p><strong>Reports</strong><br>Generate and review medical reports quickly and efficiently.</p>
+                    </div>
+                </div>
+
+                <!-- Certificates -->
+                <div class="col-md-4 feature-container">
+                    <div class="feature-icons">
+                        <i class="bi bi-file-earmark-text"></i>
+                        <p><strong>Certificates</strong><br>Generate and issue certificates for various medical needs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 MinSU HealthSync. All rights reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
