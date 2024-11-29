@@ -24,8 +24,8 @@ exports.addItem = async (req, res) => {
     await Inventory.create({ item_name, category, quantity, expiry_date });
     res.redirect('/inventory/list');
   } catch (error) {
-    console.error('Error adding item:', error);
-    res.status(500).send('Error adding item');
+    console.error('Error adding item:', error.message || error);
+    res.status(500).send(`Error adding item: ${error.message}`);
   }
 };
 
