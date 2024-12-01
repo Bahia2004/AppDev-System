@@ -38,21 +38,24 @@ async function getSatisfactionData() {
 }
 
 
-
-
 exports.getDashboardData = async (req, res) => {
+    const dateRange = req.query.dateRange || 'all';  // Default to 'all' if no range is provided
+    const year = new Date().getFullYear();  // Default year is current year
+
     try {
-   
-         const satisfactionData = await getSatisfactionData();
-         const appointmentStats = await dashboardModel.getAppointmentStats();
-         const department = await dashboardModel.getDepartmentDistribution();
-         const inventoryUsage = await dashboardModel.getInventoryUsage();
+        // Get satisfaction data
+        const satisfactionData = await getSatisfactionData();
+
+        // Get filtered data based on date range
+        const appointmentStats = await dashboardModel.getAppointmentStats(dateRange, year);
+        const department = await dashboardModel.getDepartmentDistribution(dateRange, year);
+        const inventoryUsage = await dashboardModel.getInventoryUsage(dateRange, year);
 
         res.json({
-            satisfactionData, 
-             appointmentStats, 
-             department, 
-             inventoryUsage
+            satisfactionData,
+            appointmentStats,
+            department,
+            inventoryUsage,
         });
     } catch (error) {
         console.error('Error fetching dashboard data:', error);
