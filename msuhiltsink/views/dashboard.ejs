@@ -13,120 +13,49 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        body {
-            background-color: #f0f4f8;
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
+        body {background-color: #f0f4f8;font-family: 'Poppins', sans-serif;margin: 0;padding: 0;
         }
 
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 250px;
-            background-color: #004d40;
-            padding-top: 20px;
-            color: white;
+        .sidebar {position: fixed;top: 0;left: 0;height: 100%;width: 250px;background-color: #004d40;padding-top: 20px;color: white;
         }
 
-        .sidebar-header {
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            margin-bottom: 30px;
+        .sidebar-header {display: flex;align-items: center;padding: 0 20px;margin-bottom: 30px;
         }
 
-        .sidebar-header img {
-            width: 60px;
-            height: 60px;
+        .sidebar-header img {width: 60px;height: 60px;
         }
 
-        .sidebar-header h4 {
-            margin-left: 15px;
-            font-weight: 700;
-            font-size: 1.2rem;
+        .sidebar-header h4 {margin-left: 15px;font-weight: 700;font-size: 1.2rem;
         }
 
-        .sidebar a {
-            display: flex;
-            align-items: center;
-            padding: 12px 20px;
-            color: white;
-            text-decoration: none;
-            margin-bottom: 25px; /* Adds spacing between links */
+        .sidebar a {display: flex;align-items: center;padding: 12px 20px;color: white;text-decoration: none;margin-bottom: 25px; /* Adds spacing between links */
         }
         
-        .sidebar a:hover {
-            background-color: #00695c;
-            border-left: 5px solid #4caf50;
+        .sidebar a:hover {background-color: #00695c;border-left: 5px solid #4caf50;
         }
         
-        .sidebar a i {
-            margin-right: 10px; /* Space between icon and text */
-            font-size: 18px;
+        .sidebar a i {margin-right: 10px; /* Space between icon and text */font-size: 18px;
         }
-        .content {
-            margin-left: 240px;
-            padding: 30px;
+        .content {margin-left: 240px;padding: 30px;
         }
-        .content h1 {
-            color: #2d3e3b; /* Matching color with sidebar */
-            font-size: 24px; /* Reduced font size */
-            margin-bottom: 20px;
-            font-weight: 500; /* Medium font weight */
+        .content h1 {color: #2d3e3b; /* Matching color with sidebar */font-size: 24px; /* Reduced font size */margin-bottom: 20px;font-weight: 500; /* Medium font weight */
         }
-        footer {
-            margin-top: 30px;
-            text-align: center;
-            font-size: 14px;
-            color: #888;
+        footer {margin-top: 30px;text-align: center;font-size: 14px;color: #888;
         }
-        footer p {
-            margin: 0;
+        footer p {margin: 0;
         }
-        #dynamic-content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        #dynamic-content {background-color: white;padding: 20px;border-radius: 8px;box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-        .charts-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Two columns layout */
-            gap: 20px; /* Space between charts */
+        .charts-container {display: grid;grid-template-columns: repeat(2, 1fr); /* Two columns layout */gap: 20px; /* Space between charts */
         }
-        .chart {
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            height: 300px;
+        .chart {background-color: #fff;border-radius: 8px;padding: 10px;box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);width: 100%;height: 300px;
         }
-        @media (max-width: 768px) {
-            .charts-container {
-                grid-template-columns: 1fr; /* Single column for smaller screens */
+        @media (max-width: 768px) {.charts-container {    grid-template-columns: 1fr; /* Single column for smaller screens */
             }
         }
-
-        
-        .report-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            background-color: #00695c; /* Updated button color */
-            color: white;
-            font-weight: bold;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 10;
+        .report-btn {position: fixed;top: 20px;right: 20px;padding: 10px 20px;background-color: #00695c; /* Updated button color */color: white;font-weight: bold;border: none;border-radius: 5px;cursor: pointer;z-index: 10;
         }
-        .report-btn:hover {
-            background-color: #004d40; /* Darker shade of the button color */
+        .report-btn:hover {background-color: #004d40; /* Darker shade of the button color */
         }
     </style>
 </head>
@@ -145,192 +74,230 @@
         <a href="/history"><i class="fas fa-history"></i> History</a>
     </div>
     
-    <!-- Main content area -->
-    <div class="content">
-        <h1>Dashboard</h1>
-
-        <!-- Button to generate report -->
-        <button id="generateReportBtn" class="report-btn">Generate Report</button>
-        
-        <!-- Dynamic content will be loaded here -->
-        <div id="dynamic-content">
-            <div class="charts-container">
-                <div class="chart">
-                    <canvas id="appointmentsChart"></canvas>
-                </div>
-                <div class="chart">
-                    <canvas id="departmentChart"></canvas>
-                </div>
-                <div class="chart">
-                    <canvas id="inventoryChart"></canvas>
-                </div>
-                <div class="chart">
-                    <canvas id="satisfactionChart"></canvas>
-                </div>
+<!-- Main content area -->
+<div class="content">
+    <h1>Dashboard</h1>
+    <select id="dateRange">
+        <option value="all">All Time</option>
+        <option value="last_year">Last Year</option>
+        <option value="last_month">Last Month</option>
+        <option value="last_week">Last Week</option>
+        <option value="yesterday">Yesterday</option>
+    </select>
+    <!-- Button to generate report -->
+    <button id="generateReportBtn" class="report-btn">Generate Report</button>
+    
+    <!-- Dynamic content will be loaded here -->
+    <div id="dynamic-content">
+        <div class="charts-container">
+            <div class="chart">
+                <canvas id="appointmentsChart"></canvas>
+            </div>
+            <div class="chart">
+                <canvas id="departmentChart"></canvas>
+            </div>
+            <div class="chart">
+                <canvas id="inventoryChart"></canvas>
+            </div>
+            <div class="chart">
+                <canvas id="satisfactionChart"></canvas>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Footer -->
-    <footer>
-        <p>MSU HealthSync - Clinic Management System</p>
-    </footer>
+<!-- Footer -->
+<footer>
+    <p>MSU HealthSync - Clinic Management System</p>
+</footer>
 
-    <script>
-        $(document).ready(function () {
-            // Fetch data for charts
-            fetch('/dashboard/data')
+<script>
+    $(document).ready(function () {
+        let appointmentChart, departmentChart, inventoryChart, satisfactionChart; // Track chart instances
+    
+        // Function to destroy an existing chart
+        function destroyChart(chart) {
+            if (chart) {
+                chart.destroy();
+            }
+        }
+    
+        // Fetch data for charts based on date range selection
+        function fetchData(dateRange = 'all') {
+            fetch(`/dashboard/data?dateRange=${dateRange}`)
                 .then(response => response.json())
                 .then(data => {
-                    // Render charts
-                    renderAppointmentChart(data.appointmentStats);
-                    renderDepartmentChart(data.department);
-                    renderInventoryChart(data.inventoryUsage);
-                    renderSatisfactionChart(data.satisfactionData); // Add this line to render the satisfaction chart
+                    // Destroy existing charts before rendering new ones
+                    destroyChart(appointmentChart);
+                    destroyChart(departmentChart);
+                    destroyChart(inventoryChart);
+                    destroyChart(satisfactionChart);
+    
+                    // Render charts with new data
+                    appointmentChart = renderAppointmentChart(data.appointmentStats);
+                    departmentChart = renderDepartmentChart(data.department);
+                    inventoryChart = renderInventoryChart(data.inventoryUsage);
+                    satisfactionChart = renderSatisfactionChart(data.satisfactionData);
                 })
                 .catch(error => console.error('Error fetching dashboard data:', error));
+        }
     
-            // Handle report generation
-            $('#generateReportBtn').on('click', function () {
-                $.ajax({
-                    url: '/report/generate', // The route for generating the report
-                    method: 'GET',
-                    xhrFields: {
-                        responseType: 'blob', // Ensure binary data is handled
-                    },
-                    success: function (data) {
-                        // Convert response into a downloadable file
-                        const blob = new Blob([data], { type: 'application/pdf' });
-                        const link = document.createElement('a');
-                        link.href = URL.createObjectURL(blob);
-                        link.download = 'MSU_HealthSync_Report.pdf';
-                        document.body.appendChild(link); // Append link to body for Firefox
-                        link.click(); // Trigger the download
-                        document.body.removeChild(link); // Clean up the DOM
-                    },
-                    error: function (err) {
-                        console.error('Error generating report:', err);
-                        alert('Failed to generate the report. Please try again.');
-                    },
-                });
+        // Initial data fetch for all time
+        fetchData('all');
+    
+        // Handle report generation
+        $('#generateReportBtn').on('click', function () {
+            $.ajax({
+                url: '/report/generate', // The route for generating the report
+                method: 'GET',
+                xhrFields: {
+                    responseType: 'blob', // Ensure binary data is handled
+                },
+                success: function (data) {
+                    // Convert response into a downloadable file
+                    const blob = new Blob([data], { type: 'application/pdf' });
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = 'MSU_HealthSync_Report.pdf';
+                    document.body.appendChild(link); // Append link to body for Firefox
+                    link.click(); // Trigger the download
+                    document.body.removeChild(link); // Clean up the DOM
+                },
+                error: function (err) {
+                    console.error('Error generating report:', err);
+                    alert('Failed to generate the report. Please try again.');
+                },
             });
         });
     
-        function renderAppointmentChart(stats) {
-            const ctx = document.getElementById('appointmentsChart').getContext('2d');
-            const labels = stats.map(stat => stat.status);
-            const values = stats.map(stat => stat.count);
-        
-            new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        data: values,
-                        backgroundColor: ['#4CAF50', '#FFC107', '#F44336']
-                    }]
-                },
-                options: {
-                    responsive: true, // Ensure the chart is responsive
-                    maintainAspectRatio: false // Allow the chart to resize freely within its container
-                }
-            });
-        }
-        
-        function renderDepartmentChart(stats) {
-            const ctx = document.getElementById('departmentChart').getContext('2d');
-            const labels = stats.map(stat => stat.department);
-            const values = stats.map(stat => stat.count);
-        
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Department',
-                        data: values,
-                        backgroundColor: ['#42A5F5', '#EC407A', '#6A669D', '#89A8B2', '#B1C29E', '#80C4E9', '#1F4529', '#AA5486', '#1A1A1D']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: {
-                            ticks: { beginAtZero: true }
-                        }
+        // Handle date range change
+        $('#dateRange').on('change', function () {
+            const selectedRange = this.value;
+            fetchData(selectedRange);
+        });
+    });
+    
+    // Function to render Appointment Chart
+    function renderAppointmentChart(stats) {
+        const ctx = document.getElementById('appointmentsChart').getContext('2d');
+        const labels = stats.map(stat => stat.status);
+        const values = stats.map(stat => stat.count);
+    
+        return new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: values,
+                    backgroundColor: ['#4CAF50', '#FFC107', '#F44336']
+                }]
+            },
+            options: {
+                responsive: true, // Ensure the chart is responsive
+                maintainAspectRatio: false // Allow the chart to resize freely within its container
+            }
+        });
+    }
+    
+    // Function to render Department Chart
+    function renderDepartmentChart(stats) {
+        const ctx = document.getElementById('departmentChart').getContext('2d');
+        const labels = stats.map(stat => stat.department);
+        const values = stats.map(stat => stat.count);
+    
+        return new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Department',
+                    data: values,
+                    backgroundColor: ['#42A5F5', '#EC407A', '#6A669D', '#89A8B2', '#B1C29E', '#80C4E9', '#1F4529', '#AA5486', '#1A1A1D']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        ticks: { beginAtZero: true }
                     }
                 }
-            });
-        }
-        
-        function renderInventoryChart(stats) {
-            const ctx = document.getElementById('inventoryChart').getContext('2d');
-            const labels = stats.map(stat => stat.item_name);
-            const values = stats.map(stat => stat.quantity);
-        
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Inventory Usage',
-                        data: values,
-                        borderColor: '#4CAF50',
-                        fill: false
-                    }]
+            }
+        });
+    }
+    
+    // Function to render Inventory Chart
+    function renderInventoryChart(stats) {
+        const ctx = document.getElementById('inventoryChart').getContext('2d');
+        const labels = stats.map(stat => stat.item_name);
+        const values = stats.map(stat => stat.quantity);
+    
+        return new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Inventory Usage',
+                    data: values,
+                    borderColor: '#4CAF50',
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    }
+    
+    // Function to render Satisfaction Chart
+    function renderSatisfactionChart(satisfactionData) {
+        const ctx = document.getElementById('satisfactionChart').getContext('2d');
+        const labels = Object.keys(satisfactionData);
+        const values = Object.values(satisfactionData);
+    
+        return new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Number of Respondents',
+                    data: values,
+                    backgroundColor: [
+                        '#4CAF50', // Very Satisfied - Green
+                        '#8BC34A', // Satisfied - Light Green
+                        '#FFC107', // Neutral - Yellow
+                        '#FF5722', // Dissatisfied - Orange
+                        '#F44336'  // Very Dissatisfied - Red
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: 'Respondent Satisfaction Levels'
+                    }
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
-            });
-        }
-        
-        function renderSatisfactionChart(satisfactionData) {
-            const ctx = document.getElementById('satisfactionChart').getContext('2d');
-            const labels = Object.keys(satisfactionData);
-            const values = Object.values(satisfactionData);
-        
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Number of Respondents',
-                        data: values,
-                        backgroundColor: [
-                            '#4CAF50', // Very Satisfied - Green
-                            '#8BC34A', // Satisfied - Light Green
-                            '#FFC107', // Neutral - Yellow
-                            '#FF5722', // Dissatisfied - Orange
-                            '#F44336'  // Very Dissatisfied - Red
-                        ]
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    indexAxis: 'y',
-                    plugins: {
-                        legend: { display: false },
-                        title: {
-                            display: true,
-                            text: 'Respondent Satisfaction Levels'
-                        }
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Number of Respondents' }
                     },
-                    scales: {
-                        x: {
-                            beginAtZero: true,
-                            title: { display: true, text: 'Number of Respondents' }
-                        },
-                        y: {
-                            title: { display: true, text: 'Satisfaction Levels' }
-                        }
+                    y: {
+                        title: { display: true, text: 'Satisfaction Levels' }
                     }
                 }
-            });
-        }
-    </script>
+            }
+        });
+    }
+    
+</script>
+
 </body>
 </html>
