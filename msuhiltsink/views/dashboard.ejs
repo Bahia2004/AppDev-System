@@ -146,29 +146,30 @@
         fetchData('all');
     
         // Handle report generation
-        $('#generateReportBtn').on('click', function () {
-            $.ajax({
-                url: '/report/generate', // The route for generating the report
-                method: 'GET',
-                xhrFields: {
-                    responseType: 'blob', // Ensure binary data is handled
-                },
-                success: function (data) {
-                    // Convert response into a downloadable file
-                    const blob = new Blob([data], { type: 'application/pdf' });
-                    const link = document.createElement('a');
-                    link.href = URL.createObjectURL(blob);
-                    link.download = 'MSU_HealthSync_Report.pdf';
-                    document.body.appendChild(link); // Append link to body for Firefox
-                    link.click(); // Trigger the download
-                    document.body.removeChild(link); // Clean up the DOM
-                },
-                error: function (err) {
-                    console.error('Error generating report:', err);
-                    alert('Failed to generate the report. Please try again.');
-                },
-            });
-        });
+$('#generateReportBtn').on('click', function () {
+    $.ajax({
+        url: '/report/generate', // The route for generating the report
+        method: 'GET',
+        xhrFields: {
+            responseType: 'blob', // Ensure binary data is handled
+        },
+        success: function (data) {
+            // Convert response into a downloadable CSV file
+            const blob = new Blob([data], { type: 'text/csv' }); // CSV MIME type
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'MinSU_HealthSync_Report.csv'; // Change file extension to .csv
+            document.body.appendChild(link); // Append link to body for Firefox
+            link.click(); // Trigger the download
+            document.body.removeChild(link); // Clean up the DOM
+        },
+        error: function (err) {
+            console.error('Error generating report:', err);
+            alert('Failed to generate the report. Please try again.');
+        },
+    });
+});
+
     
         // Handle date range change
         $('#dateRange').on('change', function () {
