@@ -127,21 +127,30 @@
         <a href="/inventory/list"><i class="fas fa-pills"></i> Medicine Inventory</a>
         <a href="/service/list"><i class="fas fa-stethoscope"></i> Medical Services</a>
         <a href="/history"><i class="fas fa-history"></i> History</a>
-      </div>
+    </div>
       
-    
     <!-- Main content area -->
     <div class="content">
-        <a href="/inventory/add" class="btn btn-custom add-item-btn">Add New Item</a>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <a href="/inventory/add" class="btn btn-custom add-item-btn">Add New Item</a>
+            <input 
+                type="text" 
+                id="search-bar" 
+                class="form-control" 
+                placeholder="Search medicines..." 
+                style="width: 300px;"
+            />
+        </div>
 
         <!-- Inventory Table -->
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="inventory-table">
             <thead>
                 <tr>
-                    <th>Item Name</th>
+                    <th>Medicine</th>
                     <th>Category</th>
                     <th>Quantity</th>
                     <th>Date</th>
+                    <th>Expired Date</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -151,6 +160,7 @@
                     <td><%= item.item_name %></td>
                     <td><%= item.category %></td>
                     <td><%= item.quantity %></td>
+                    <td><%= item.created_at ? item.created_at.toISOString().split('T')[0] : 'N/A' %></td>        
                     <td><%= item.expiry_date ? item.expiry_date.toISOString().split('T')[0] : 'N/A' %></td>
                     <td class="action-links">
                         <a href="/inventory/edit/<%= item.inventory_id %>" class="btn btn-sm">
@@ -168,6 +178,24 @@
             </tbody>
         </table>
     </div>
+    <script>
+        // Search bar functionality
+        document.getElementById('search-bar').addEventListener('keyup', function () {
+            const filter = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#inventory-table tbody tr');
+    
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                const rowText = Array.from(cells).map(cell => cell.textContent.toLowerCase()).join(' ');
+    
+                if (rowText.includes(filter)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
 

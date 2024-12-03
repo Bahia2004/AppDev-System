@@ -118,7 +118,7 @@
                     <input type="text" class="form-control" id="category" name="category" required>
                 </div>
                 <div class="form-group">
-                    <label for="item_name">Item Name</label>
+                    <label for="item_name">Medicine</label>
                     <input type="text" class="form-control" id="item_name" name="item_name" required>
                 </div>
                 <div class="form-group">
@@ -126,7 +126,7 @@
                     <input type="number" class="form-control" id="quantity" name="quantity" required min="0">
                 </div>
                 <div class="form-group">
-                    <label for="expiry_date">Date</label>
+                    <label for="expiry_date">Expired Date</label>
                     <input type="date" class="form-control" id="expiry_date" name="expiry_date" required>
                 </div>
                 <button type="submit" class="btn btn-add btn-block">Add Item</button>
@@ -134,5 +134,50 @@
             <a href="/inventory/list" class="btn btn-back btn-block mt-3">Back to Inventory</a>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            // Handle form submission via AJAX
+            $('form').on('submit', function (e) {
+                e.preventDefault(); // Prevent the default form submission
+    
+                // Collect form data
+                const formData = {
+                    category: $('#category').val().trim(),
+                    item_name: $('#item_name').val().trim(),
+                    quantity: $('#quantity').val(),
+                    expiry_date: $('#expiry_date').val(),
+                };
+    
+                // Send data to the server via AJAX
+                $.ajax({
+                    url: '/inventory/add',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData),
+                    success: function () {
+                        // Redirect on success
+                        window.location.href = '/inventory/list';
+                    },
+                    error: function (xhr) {
+                        if (xhr.status === 400) {
+                            // Display duplicate entry error
+                            $('#error-message').text(xhr.responseJSON.error).css('color', 'red');
+                            $('#item_name').addClass('is-invalid');
+                        } else {
+                            // Handle other errors
+                            alert('This medicine already exist');
+                        }
+                    },
+                });
+            });
+    
+            // Reset error state on input change
+            $('#item_name').on('input', function () {
+                $('#error-message').text('');
+                $('#item_name').removeClass('is-invalid');
+            });
+        });
+    </script>
+    
 </body>
 </html>

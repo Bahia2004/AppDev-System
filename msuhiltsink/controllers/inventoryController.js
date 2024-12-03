@@ -20,14 +20,20 @@ exports.addItemForm = (req, res) => {
 // Add Inventory Item
 exports.addItem = async (req, res) => {
   const { item_name, category, quantity, expiry_date } = req.body;
+
   try {
     await Inventory.create({ item_name, category, quantity, expiry_date });
     res.redirect('/inventory/list');
   } catch (error) {
-    console.error('Error adding item:', error.message || error);
-    res.status(500).send(`Error adding item: ${error.message}`);
+    if (error.name === 'SequelizeUniqueConstraintError') {
+      // Send a JSON response for duplicate entry
+      return res.status(400).json({ error: `The medicine "${item_name}" already exists.` });
+    }
+    console.error('Error adding item:', error);
+    res.status(500).json({ error: 'An unexpected error occurred. Please try again later.' });
   }
 };
+
 
 // Display Edit Inventory Form
 exports.editItemForm = async (req, res) => {
@@ -48,10 +54,10 @@ exports.editItemForm = async (req, res) => {
 // Update Inventory Item
 exports.updateItem = async (req, res) => {
   const { id } = req.params;
-  const { item_name, category } = req.body;
+  const { item_name, category, expiry_date } = req.body;
 
   try {
-    await Inventory.update({ item_name, category }, id);
+    await Inventory.update({ item_name, category, expiry_date }, id);
     res.redirect('/inventory/list');
   } catch (error) {
     console.error('Error updating item:', error);

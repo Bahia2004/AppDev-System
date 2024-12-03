@@ -99,8 +99,6 @@
     <a href="/history"><i class="fas fa-history"></i> History</a>
   </div>
   
-
-
     <!-- Main content area -->
     <div class="content">
         <div class="container">
@@ -115,8 +113,8 @@
                     <input type="text" class="form-control" id="item_name" name="item_name" value="<%= item.item_name %>" required>
                 </div>
                 <div class="form-group">
-                    <label for="quantity" class="form-label">Quantity</label>
-                    <input type="number" class="form-control" id="quantity" name="quantity" value="<%= item.quantity %>" readonly required>
+                    <label for="expiry_date" class="form-label">Expired Date</label>
+                    <input type="date" class="form-control" id="expiry_date" name="expiry_date" value="<%= item.expiry_date %>" required>
                 </div>
                 <button type="submit" class="btn btn-update btn-block">Update Item</button>
                 <a href="/inventory/list" class="btn btn-cancel btn-block mt-3">Cancel</a>

@@ -18,9 +18,9 @@ const Inventory = {
     return rows[0];
   },
   
-  update: async ({ item_name, category }, id) => {
-    const query = 'UPDATE inventory SET item_name = ?, category = ? WHERE inventory_id = ?';
-    const [result] = await db.execute(query, [item_name, category, id]);
+  update: async ({ item_name, category, expiry_date }, id) => {
+    const query = 'UPDATE inventory SET item_name = ?, category = ?, expiry_date = ? WHERE inventory_id = ?';
+    const [result] = await db.execute(query, [item_name, category, expiry_date, id]);
     return result;
   },
 
