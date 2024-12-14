@@ -12,29 +12,60 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-image: url('https://minsu.edu.ph/template/images/slides/slides_1.jpg'); /* Same background as Add Inventory */
+            background-color: #f0f4f8;
             background-size: cover;
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
         }
-        .sidebar { position: fixed; top: 0; left: 0; height: 100%; width: 250px; background-color: #004d40; padding-top: 20px; color: white; }
-        .sidebar-header { display: flex; align-items: center; padding: 0 20px; margin-bottom: 30px; }
-        .sidebar-header img { width: 60px; height: 60px; }
-        .sidebar-header h4 { margin-left: 15px; font-weight: 700; font-size: 1.2rem; }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 250px;
+            background-color: #004d40;
+            padding-top: 20px;
+            color: white;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            margin-bottom: 30px;
+        }
+
+        .sidebar-header img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .sidebar-header h4 {
+            margin-left: 15px;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
         .sidebar a {
             display: block;
-            padding: 15px 20px; /* Increased padding for better spacing */
+            padding: 12px 20px;
             color: white;
             text-decoration: none;
-            margin-bottom: 10px; /* Add margin to create space between links */
+            margin-bottom: 15px;
         }
-        
+
         .sidebar a:hover {
             background-color: #00695c;
             border-left: 5px solid #4caf50;
         }
-        
+
+        .sidebar a i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
         .content {
             margin-left: 240px;
             padding: 20px;
@@ -44,41 +75,39 @@
             background-color: white;
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        .close-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.2rem;
+            color:  #00796b;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .close-icon:hover {
+            color: #004d40;
         }
         .btn-update {
-        background-color: #9b870c;
-        color: white;
-        border: none;
-        text-align: center;
-        padding: 10px 20px;
-        border-radius: 5px;
-        font-size: 1rem;
-        text-decoration: none;
-        display: inline-block;
+            background-color: #00796b;
+            color: white;
+            border: none;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
         }
         .btn-update:hover {
-            background-color: #cfb53b;
+            background-color:  #004d40;
         }
-        .btn-cancel {
-        background-color: #21421e;
-        color: white;
-        border: none;
-        text-align: center;
-        padding: 10px 20px;
-        border-radius: 5px;
-        font-size: 1rem;
-        text-decoration: none;
-        display: inline-block;
-    }
-
-    .btn-cancel:hover {
-        background-color: #2a5c27; /* Slightly lighter for hover effect */
-    }
         h1 {
             text-align: center;
-            font-size: 1.5rem; /* Adjusted font size */
-            font-weight: 500; /* Font weight for emphasis */
+            font-size: 1.5rem;
+            font-weight: 500;
             color: #00796b;
             margin-bottom: 20px;
         }
@@ -87,21 +116,22 @@
 <body>
    <!-- Sidebar -->
    <div class="sidebar">
-    <div class="sidebar-header">
-      <img src="https://mmc-enrollment.minsu.edu.ph/img/logo.png" alt="MSU Logo">
-      <h4>MinSU HealthSync</h4>
-    </div>
-    <a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-    <a href="/patient/list"><i class="fas fa-users"></i> Patient Records</a>
-    <a href="/appointment"><i class="fas fa-calendar-check"></i> Appointment</a>
-    <a href="/inventory/list"><i class="fas fa-pills"></i> Medicine Inventory</a>
-    <a href="/service/list"><i class="fas fa-stethoscope"></i> Medical Services</a>
-    <a href="/history"><i class="fas fa-history"></i> History</a>
-  </div>
+        <div class="sidebar-header">
+            <img src="https://mmc-enrollment.minsu.edu.ph/img/logo.png" alt="MSU Logo">
+            <h4>MinSU HealthSync</h4>
+        </div>
+        <a href="/dashboard"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="/patient/list"><i class="fas fa-users"></i> Patient Records</a>
+        <a href="/appointment"><i class="fas fa-calendar-alt"></i> Appointment</a>
+        <a href="/inventory/list"><i class="fas fa-pills"></i> Medicine Inventory</a>
+        <a href="/service/list"><i class="fas fa-briefcase-medical"></i> Medical Services</a>
+        <a href="/history"><i class="fas fa-history"></i> History</a>
+   </div>
   
     <!-- Main content area -->
     <div class="content">
         <div class="container">
+            <a href="/inventory/list" class="close-icon" title="Close"><i class="fas fa-times"></i></a>
             <h1 class="text-center">Edit Inventory Item</h1>
             <form action="/inventory/edit/<%= item.inventory_id %>" method="POST">
                 <div class="form-group">
@@ -117,10 +147,8 @@
                     <input type="date" class="form-control" id="expiry_date" name="expiry_date" value="<%= item.expiry_date %>" required>
                 </div>
                 <button type="submit" class="btn btn-update btn-block">Update Item</button>
-                <a href="/inventory/list" class="btn btn-cancel btn-block mt-3">Cancel</a>
             </form>
         </div>
     </div>
 </body>
 </html>
-
