@@ -24,6 +24,11 @@ app.use(session({
 // Set view engine if you're using one (e.g., EJS, Pug)
 app.set('view engine', 'ejs');
 
+// Root route to render home page
+app.get('/', (req, res) => {
+  res.render('home'); // Render 'home' view directly
+});
+
 app.get('/', (req, res) => {
   if (req.session.adminId) {
     res.redirect('/dashboard'); // Redirect to a dashboard if already logged in
@@ -32,7 +37,7 @@ app.get('/', (req, res) => {
   }
 });
 
-app.get('/dashboard', ensureAuthenticated, (req, res) => {
+app.get('/dashboard', /*ensureAuthenticated,*/ (req, res) => {
   res.render('dashboard'); // Ensure a 'dashboard.ejs' view exists in the 'views' folder
 });
 
@@ -78,6 +83,35 @@ app.get('/patient/history', (req, res) => {
 app.get('/generate-report', (req, res) => {
   res.render('generateReport');
 });
+
+
+// Routes
+app.get('/home', (req, res) => {
+  res.render('home');
+});
+
+app.get('/about', (req, res) => {
+  res.render('about');
+});
+
+app.get('/contact', (req, res) => {
+  res.render('contact');
+});
+
+app.get('/features', (req, res) => {
+  res.render('features');
+});
+
+app.get('/services', (req, res) => {
+  res.render('services');
+});
+
+
+
+
+
+
+
 
 // Routes
 app.use('/admin', adminRoutes);
