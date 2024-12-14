@@ -4,13 +4,19 @@ const db = require('../config/db');
 const Service = {
   getAll: async () => {
     try {
-      const [rows] = await db.query('SELECT * FROM services');
+      const [rows] = await db.query(`
+        SELECT service_id, patient_id, patient_name, doctor_in_charge, date, 
+               service_type, blood_pressure, pulse_rate, respiratory_rate, 
+               temperature, medication, quantity_taken, medical_notes
+        FROM services
+      `);
       return rows;
     } catch (error) {
       console.error("Error fetching all services:", error);
       throw error;
     }
   },
+
 
   getById: async (id) => {
     try {
@@ -24,13 +30,14 @@ const Service = {
 
   addService: async (serviceData) => {
     try {
-      return await db.query('INSERT INTO services SET ?', serviceData);
+        return await db.query('INSERT INTO services SET ?', serviceData);
     } catch (error) {
-      console.error("Error adding service:", error);
-      throw error;
+        console.error("Error adding service:", error);
+        throw error;
     }
-  },
+},
 
+  
   updateService: async (id, serviceData) => {
     try {
       return await db.query('UPDATE services SET ? WHERE service_id = ?', [serviceData, id]);
