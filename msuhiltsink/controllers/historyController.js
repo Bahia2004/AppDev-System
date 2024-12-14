@@ -3,10 +3,11 @@ const db = require('../config/db');
 // Fetch Patient Records
 exports.getPatientRecords = async (req, res) => {
   try {
-    const [records] = await db.execute('SELECT * FROM patients ORDER BY createdAt DESC');
-    res.render('history/patientRecords', { title: 'Patient Records', records });
+    const [records] = await db.execute('SELECT * FROM patients ORDER BY created_at DESC');
+    res.json({ success: true, records }); // Send JSON response
   } catch (err) {
-    res.status(500).send('Error fetching patient records.');
+    console.error(err);
+    res.status(500).json({ success: false, message: 'Error fetching patient records.' });
   }
 };
 
@@ -14,18 +15,20 @@ exports.getPatientRecords = async (req, res) => {
 exports.getMedicineInventory = async (req, res) => {
   try {
     const [inventory] = await db.execute('SELECT * FROM inventory ORDER BY created_at DESC');
-    res.render('history/medicineInventory', { title: 'Medicine Inventory', inventory });
+    res.json({ success: true, inventory }); // Send JSON response
   } catch (err) {
-    res.status(500).send('Error fetching inventory.');
+    console.error(err);
+    res.status(500).json({ success: false, message: 'Error fetching inventory.' });
   }
 };
 
-// Fetch Services History
+// Fetch Service History
 exports.getServices = async (req, res) => {
   try {
     const [services] = await db.execute('SELECT * FROM services ORDER BY date DESC');
-    res.render('history/services', { title: 'Service Records', services });
+    res.json({ success: true, services }); // Send JSON response
   } catch (err) {
-    res.status(500).send('Error fetching services.');
+    console.error(err);
+    res.status(500).json({ success: false, message: 'Error fetching services.' });
   }
 };
