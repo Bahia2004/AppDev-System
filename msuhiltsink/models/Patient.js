@@ -16,7 +16,7 @@ class Patient {
         // Check if patient_id is provided before insertion
         if (!patient_id) {
             throw new Error('Patient ID is required');
-        }
+        } 
 
         await db.query(
             'INSERT INTO patients (patient_id, address, email, bloodType, contact, department, fullName, gender, guardian, guardian_contact, height, weight) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
