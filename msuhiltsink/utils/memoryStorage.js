@@ -1,13 +1,18 @@
-// memoryStorage.js
-
 let inMemoryInventory = [];
 
-// Function to log inventory updates
-function logInventoryUpdate(inventoryId, quantityAdded) {
-  inMemoryInventory.push({ inventoryId, quantityAdded, timestamp: new Date() });
+function logInventoryUpdate(inventoryId, itemName, quantityAdded, oldQuantity, newQuantity) {
+  inMemoryInventory.push({
+    inventoryId,
+    itemName,  // Store the item name
+    quantityAdded,
+    oldQuantity,
+    newQuantity,
+    timestamp: new Date(),
+  });
 }
 
-// Function to get inventory history from memory
+
+
 function getInventoryHistory(inventoryId) {
   return inMemoryInventory.filter(log => log.inventoryId === inventoryId);
 }
