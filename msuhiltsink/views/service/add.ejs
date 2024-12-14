@@ -10,32 +10,65 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
     <style>
         body {
-            background-image: url('https://minsu.edu.ph/template/images/slides/slides_1.jpg');
+            background-color: #f0f4f8;
             background-size: cover;
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
         }
 
-        .sidebar { position: fixed; top: 0; left: 0; height: 100%; width: 250px; background-color: #004d40; padding-top: 20px; color: white; }
-        .sidebar-header { display: flex; align-items: center; padding: 0 20px; margin-bottom: 30px; }
-        .sidebar-header img { width: 60px; height: 60px; }
-        .sidebar-header h4 { margin-left: 15px; font-weight: 700; font-size: 1.2rem; }
-        .sidebar a {
-            display: block;
-            padding: 15px 20px; /* Increased padding for better spacing */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 250px;
+            background-color: #004d40;
+            padding-top: 20px;
             color: white;
-            text-decoration: none;
-            margin-bottom: 10px; /* Add margin to create space between links */
         }
-        
-        .sidebar a:hover {
-            background-color: #00695c;
-            border-left: 5px solid #4caf50;
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            margin-bottom: 30px;
         }
-        
+
+        .sidebar-header img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .sidebar-header h4 {
+            margin-left: 15px;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .sidebar a {
+  display: block;
+  padding: 12px 20px;
+  color: white;
+  text-decoration: none;
+  margin-bottom: 15px;
+}
+
+.sidebar a:hover {
+  background-color: #00695c;
+  border-left: 5px solid #4caf50;
+}
+
+        .sidebar a i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
 
         .content {
             margin-left: 240px;
@@ -47,7 +80,7 @@
             background-color: white;
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
             margin-top: 20px;
             position: relative;
         }
@@ -62,39 +95,22 @@
 
         label {
             font-size: 1rem;
-            margin-bottom: 5px;
-            font-weight: 600;
+            margin-bottom: 3px;
+            font-weight: 500;
         }
 
         input, textarea, select {
             width: 100%;
             padding: 5px;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 1rem;
             box-sizing: border-box;
         }
 
-        .form-row {
-            margin-bottom: 3px;
-        }
-
-        .form-row > .form-group {
-            margin-bottom: 3px;
-        }
-
-        .form-row .form-group {
-            flex: 1;
-            padding-right: 10px;
-        }
-
-        .form-row .form-group:last-child {
-            padding-right: 0;
-        }
-
         .btn-add {
-            background-color: #9b870c;
+            background-color: #00796b;
             color: white;
             border: none;
             text-align: center;
@@ -106,7 +122,7 @@
         }
 
         .btn-add:hover {
-            background-color: #cfb53b;
+            background-color: #004d40;
         }
 
         .close-btn {
@@ -131,18 +147,16 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-header">
-          <img src="https://mmc-enrollment.minsu.edu.ph/img/logo.png" alt="MSU Logo">
-          <h4>MinSU HealthSync</h4>
+            <img src="https://mmc-enrollment.minsu.edu.ph/img/logo.png" alt="MSU Logo">
+            <h4>MinSU HealthSync</h4>
         </div>
-        <a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        <a href="/dashboard"><i class="fas fa-home"></i> Dashboard</a>
         <a href="/patient/list"><i class="fas fa-users"></i> Patient Records</a>
-        <a href="/appointment"><i class="fas fa-calendar-check"></i> Appointment</a>
+        <a href="/appointment"><i class="fas fa-calendar-alt"></i> Appointment</a>
         <a href="/inventory/list"><i class="fas fa-pills"></i> Medicine Inventory</a>
-        <a href="/service/list"><i class="fas fa-stethoscope"></i> Medical Services</a>
+        <a href="/service/list"><i class="fas fa-briefcase-medical"></i> Medical Services</a>
         <a href="/history"><i class="fas fa-history"></i> History</a>
-      </div>
-      
-    
+    </div>
 
     <!-- Main content area -->
     <div class="content">
@@ -164,6 +178,7 @@
                             <% }) %>
                         </select>
                     </div>
+                    
                     <div class="form-group col-md-4">
                         <label for="doctor_in_charge">Doctor in Charge:</label>
                         <input type="text" id="doctor_in_charge" name="doctor_in_charge" required>
@@ -194,21 +209,47 @@
                         <label for="temperature">Temperature:</label>
                         <input type="text" id="temperature" name="temperature" required>
                     </div>
-                </div>
-
-                <div class="form-group">
+                    <div class="form-group col-md-4">
+                        <label for="inventory_id">Select Medication:</label>
+                        <select id="inventory_id" name="inventory_id" required>
+                            <option value="">Select Medication</option>
+                            <% items.forEach(item => { %>
+                                <option value="<%= item.inventory_id %>"><%= item.item_name %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    
+    
+                    <div class="form-group col-md-4">
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" id="quantity" name="quantity" min="1" required>
+                    </div>
+                    
+    
+ <div class="form-group" >
                     <label for="medical_notes">Medical Notes:</label>
                     <textarea id="medical_notes" name="medical_notes" rows="3" required></textarea>
                 </div>
-
-                <div class="form-group">
-                    <label for="medication">Medication:</label>
-                    <textarea id="medication" name="medication" rows="3" required></textarea>
-                </div>
- 
                 <button type="submit" class="btn btn-add btn-block">Add Service</button>
             </form>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            // Initialize Select2 for the patient select dropdown
+            $('#patient_id').select2({
+                placeholder: "Select a Patient",  // Optional placeholder text
+                width: '100%'  // Optional to make it fill the width
+            });
+    
+            // Initialize Select2 for the medicine select dropdown
+            $('#inventory_id').select2({
+                placeholder: "Select Medication",  // Optional placeholder text
+                width: '100%'  // Optional to make it fill the width
+            });
+        });
+    </script>
+    
+    
 </body>
 </html>
