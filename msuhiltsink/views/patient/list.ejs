@@ -5,42 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap and Google Fonts -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 
     <style>
         /* General Styles */
         body {
-            background-image: url('https://minsu.edu.ph/template/images/slides/slides_1.jpg');
-            background-size: cover;
+            background: #d3d3d3;
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
+            color: #ffffff; /* Light text color for readability */
         }
 
-        /* Sidebar Styles */
-        .sidebar { position: fixed; top: 0; left: 0; height: 100%; width: 250px; background-color: #004d40; padding-top: 20px; color: white; }
-        .sidebar-header { display: flex; align-items: center; padding: 0 20px; margin-bottom: 30px; }
-        .sidebar-header img { width: 60px; height: 60px; }
-        .sidebar-header h4 { margin-left: 15px; font-weight: 700; font-size: 1.2rem; }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 250px;
+            background-color: #004d40;
+            padding-top: 20px;
+            color: white;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            margin-bottom: 30px;
+        }
+
+        .sidebar-header img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .sidebar-header h4 {
+            margin-left: 15px;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
         .sidebar a {
             display: block;
-            padding: 15px 20px; /* Increased padding for better spacing */
+            padding: 12px 20px;
             color: white;
             text-decoration: none;
-            margin-bottom: 10px; /* Add margin to create space between links */
+            margin-bottom: 15px;
         }
-        
+
         .sidebar a:hover {
             background-color: #00695c;
             border-left: 5px solid #4caf50;
         }
-        
+
+        .sidebar i {
+            margin-right: 10px;
+        }
 
         /* Content Styling */
         .content {
@@ -51,7 +77,9 @@
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             width: calc(100% - 280px);
+            position: relative; /* For positioning elements inside */
         }
+
         .content h1 {
             color: #004d40;
             font-weight: 600;
@@ -61,10 +89,10 @@
 
         /* Green Button Styling */
         .btn-custom-green {
-            background-color:#00796b; /* Green background */
+            background-color: #00796b; /* Green background */
             color: white; /* White text */
-            padding: 10px 20px; /* Padding for size */
-            border-radius: 5px; /* Rounded corners */
+             padding: 5px 10px;
+            font-size: 0.9rem;
             font-weight: 500;
             text-decoration: none;
             transition: background-color 0.3s ease; /* Smooth color change on hover */
@@ -75,6 +103,36 @@
             color: white; /* Ensure the text remains white */
         }
 
+        /* Search bar Styling */
+        .search-bar {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-bar input {
+            padding: 5px 10px;
+            font-size: 0.9rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .search-bar button {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 15px;
+            margin-left: 10px;
+            font-size: 0.9rem;
+        }
+
+        .search-bar button:hover {
+            background-color: #004d40;
+        }
+
         /* Table Styling */
         table {
             width: 100%;
@@ -82,10 +140,12 @@
             margin-top: 15px;
             table-layout: fixed; /* Ensures the table fits within the container */
         }
+
         table thead {
             background-color: #555d50;
             color: white;
         }
+
         table th, table td {
             padding: 4px 6px; /* Reduced padding for compact rows */
             text-align: center;
@@ -96,24 +156,30 @@
             text-overflow: ellipsis; /* Adds ellipsis for overflowed text */
             white-space: nowrap; /* Prevents text wrapping */
         }
+
         table th {
             font-weight: 500;
         }
+
         table tbody tr:nth-child(even) {
             background-color: #f4f4f4;
         }
+
         table tbody tr:hover {
             background-color: #e0f2f1;
         }
+
         .action-links a {
             margin-right: 5px; /* Reduced margin between action icons */
             color: #00796b;
             text-decoration: none;
             font-size: 1.1rem;
         }
+
         .action-links a:hover {
             color: #004d40;
         }
+
         .btn-sm {
             padding: 3px 8px; /* Adjusted padding for compact action buttons */
             font-size: 0.8rem; /* Slightly smaller font size */
@@ -125,30 +191,33 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-header">
-          <img src="https://mmc-enrollment.minsu.edu.ph/img/logo.png" alt="MSU Logo">
-          <h4>MinSU HealthSync</h4>
+            <img src="https://mmc-enrollment.minsu.edu.ph/img/logo.png" alt="MSU Logo">
+            <h4>MinSU HealthSync</h4>
         </div>
-        <a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        <a href="/dashboard"><i class="fas fa-home"></i> Dashboard</a>
         <a href="/patient/list"><i class="fas fa-users"></i> Patient Records</a>
-        <a href="/appointment"><i class="fas fa-calendar-check"></i> Appointment</a>
+        <a href="/appointment"><i class="fas fa-calendar-alt"></i> Appointment</a>
         <a href="/inventory/list"><i class="fas fa-pills"></i> Medicine Inventory</a>
-        <a href="/service/list"><i class="fas fa-stethoscope"></i> Medical Services</a>
+        <a href="/service/list"><i class="fas fa-briefcase-medical"></i> Medical Services</a>
         <a href="/history"><i class="fas fa-history"></i> History</a>
-      </div>
-      
-      
-    
+    </div>
 
     <!-- Main content area -->
     <div class="content">
         
-        <!-- Add Patient Button -->
+        <!-- Add Patient Button and Search Bar -->
         <a href="/patient/add" class="btn btn-custom-green">Add New Patient</a>
+        
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" placeholder="Search Patients..." id="searchPatient">
+            <button type="button" onclick="searchPatients()">Search</button>
+        </div>
 
         <!-- Patient Table -->
         <div class="table-container">
             <div class="table-responsive">
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered" id="patientTable">
                     <thead>
                         <tr>
                             <th>School ID</th>
@@ -199,5 +268,46 @@
         </div>
     </div>
 
+    <script>
+        function searchPatients() {
+            let input = document.getElementById('searchPatient');
+            let filter = input.value.toLowerCase();
+            let table = document.getElementById('patientTable');
+            let tr = table.getElementsByTagName('tr');
+
+            // Loop through all table rows
+            for (let i = 1; i < tr.length; i++) {
+                let td = tr[i].getElementsByTagName('td');
+                let found = false;
+
+                // Check if any cell in the row matches the search term
+                for (let j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        let txtValue = td[j].textContent || td[j].innerText;
+                        if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                            found = true;
+                        }
+                    }
+                }
+
+                if (found) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+
+        // Reset to full list when search bar is empty
+        document.getElementById('searchPatient').addEventListener('input', function() {
+            if (this.value === "") {
+                let table = document.getElementById('patientTable');
+                let tr = table.getElementsByTagName('tr');
+                for (let i = 1; i < tr.length; i++) {
+                    tr[i].style.display = "";
+                }
+            }
+        });
+    </script>
 </body>
 </html>
