@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Clinic Website</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts for improved typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Lato:wght@400;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* General body and text styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-image: url('https://minsu.edu.ph/template/images/slides/slides_1.jpg');
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Section */
+        header {
+            background: #014421;
+            color: white;
+        }
+
+        header .navbar-brand img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        header .navbar-nav .nav-link {
+            color: white !important;
+            font-size: 1rem;
+            padding: 8px 15px;
+            transition: color 0.3s ease;
+        }
+
+        header .navbar-nav .nav-link:hover {
+            color: #f8f9fa;
+        }
+
+        /* Main Section */
+        main {
+            padding: 40px 0;
+            flex-grow: 1;
+            color: white;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .container-box {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px; /* Adjusted width for rectangle form */
+            width: 100%;
+            text-align: left; /* Left-align text */
+        }
+
+        /* Adjusted title style */
+        .container-box h2 {
+            font-size: 1.4rem; /* Smaller font size */
+            font-family: 'Poppins', sans-serif; /* New font style */
+            color: #014421;
+            margin-bottom: 20px; /* Adjusted margin */
+        }
+
+        .container-box p {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Form Styles */
+        form {
+            display: flex;
+            flex-wrap: wrap; /* Allow the form fields to wrap */
+            gap: 10px;
+        }
+
+        form label {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #333;
+            width: 100%;
+        }
+
+        form input, form textarea {
+            padding: 12px; /* Increased padding for larger input fields */
+            font-size: 1rem; /* Slightly larger font size */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px; /* Increased margin for better spacing */
+        }
+
+        form input {
+            width: 100%; /* Make input fields full-width */
+        }
+
+        form input.half-width {
+            width: 100%; /* Ensure it takes full width on all screen sizes */
+        }
+
+        form input.full-width, form textarea.full-width {
+            width: 100%; /* Full width for message field */
+        }
+
+        form textarea {
+            height: 150px; /* Increased height for the textarea */
+            resize: vertical; /* Allow vertical resizing */
+        }
+
+        form button {
+            padding: 10px 15px;
+            background-color: #014421;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        form button:hover {
+            background-color: #005b3e;
+        }
+
+        /* Footer Section */
+        footer {
+            background: #014421;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.8rem;
+        }
+
+        footer p:hover {
+            color: #f8f9fa;
+            cursor: pointer;
+        }
+
+        /* Media Queries */
+        @media (max-width: 767px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-end;
+                padding-right: 0;
+            }
+
+            nav a {
+                font-size: 0.8rem;
+                padding: 5px;
+            }
+
+            .logo-title {
+                justify-content: center;
+                margin-bottom: 10px;
+            }
+
+            /* Make all inputs full width on small screens */
+            form input, form textarea {
+                width: 100%;
+            }
+
+            /* Adjust row labels for better responsiveness */
+            .row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <!-- Logo and Title -->
+            <a class="navbar-brand d-flex align-items-center" href="/home">
+                <img src="https://minsu.edu.ph/template/images/logo.png" alt="Logo" class="img-fluid">
+                <span class="fw-bold h4 mb-0">MinSU HealthSync</span>
+            </a>
+
+            <!-- Navbar Toggler for Mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation Links -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/login">Log in</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container-box">
+            <h2>Send Us A Message!</h2>
+            <form action="#" method="POST">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="firstname">First Name:</label>
+                        <input type="text" id="firstname" name="firstname" class="half-width" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="lastname">Last Name:</label>
+                        <input type="text" id="lastname" name="lastname" class="half-width" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="mobile">Mobile Number:</label>
+                        <input type="tel" id="mobile" name="mobile" class="half-width" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" class="half-width" required>
+                    </div>
+                </div>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" class="full-width" required></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Clinic Website</p>
+    </footer>
+</body>
+</html>

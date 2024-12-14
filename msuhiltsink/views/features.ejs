@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - MinSU HealthSync</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts for improved typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        /* General body and text styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-image: url('https://minsu.edu.ph/template/images/slides/slides_1.jpg');
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Section */
+        header {
+            background: #014421;
+            color: white;
+        }
+
+        header .navbar-brand img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        header .navbar-nav .nav-link {
+            color: white !important;
+            font-size: 1rem;
+            padding: 8px 15px;
+            transition: color 0.3s ease;
+        }
+
+        header .navbar-nav .nav-link:hover {
+            color: #f8f9fa;
+        }
+
+        /* Main Section */
+        main {
+            padding: 20px 0;
+            flex-grow: 1;
+            color: white;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Feature Containers */
+        .feature-container {
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            height: 180px; /* Reduced height */
+            width: 180px; /* Reduced width */
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-container .feature-icons i {
+            font-size: 2rem; /* Reduced icon size */
+            color: #014421;
+            transition: color 0.3s ease;
+        }
+
+        .feature-container .feature-icons i:hover {
+            color: #006633;
+        }
+
+        .feature-container p {
+            margin-top: 10px;
+            font-weight: 400;
+            color: #666666; /* Lighter gray color */
+            font-size: 0.8rem; /* Reduced font size */
+            font-family: 'Arial', sans-serif; /* Changed font style */
+        }
+
+        /* Footer Styling */
+        footer {
+            background: #014421;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        footer p:hover {
+            color: #f8f9fa;
+            cursor: pointer;
+        }
+
+        /* Responsive footer */
+        footer p:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <!-- Logo and Title -->
+            <a class="navbar-brand d-flex align-items-center" href="/home">
+                <img src="https://minsu.edu.ph/template/images/logo.png" alt="Logo" class="img-fluid">
+                <span class="fw-bold h4 mb-0">MinSU HealthSync</span>
+            </a>
+
+            <!-- Navbar Toggler for Mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation Links -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/login">Log in</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content Section -->
+    <main>
+        <h2>Our Key Features</h2>
+
+        <!-- Feature Containers -->
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- Patient Information -->
+                <div class="col-md-4 feature-container">
+                    <div class="feature-icons">
+                        <i class="bi bi-person-badge"></i>
+                        <p><strong>Patient Information</strong><br>Manage and store patient data securely for quick access.</p>
+                    </div>
+                </div>
+
+                <!-- Appointments -->
+                <div class="col-md-4 feature-container">
+                    <div class="feature-icons">
+                        <i class="bi bi-calendar-check"></i>
+                        <p><strong>Appointments</strong><br>Schedule and track patient appointments with ease.</p>
+                    </div>
+                </div>
+
+                <!-- Medical Services -->
+                <div class="col-md-4 feature-container">
+                    <div class="feature-icons">
+                        <i class="bi bi-hospital"></i>
+                        <p><strong>Medical Services</strong><br>Access a wide range of medical services and consultations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <!-- Admission -->
+                <div class="col-md-4 feature-container">
+                    <div class="feature-icons">
+                        <i class="bi bi-person-plus"></i>
+                        <p><strong>Admission</strong><br>Simplified patient admission process for smooth workflows.</p>
+                    </div>
+                </div>
+
+                <!-- Reports -->
+                <div class="col-md-4 feature-container">
+                    <div class="feature-icons">
+                        <i class="bi bi-file-earmark-medical"></i>
+                        <p><strong>Reports</strong><br>Generate and review medical reports quickly and efficiently.</p>
+                    </div>
+                </div>
+
+                <!-- Certificates -->
+                <div class="col-md-4 feature-container">
+                    <div class="feature-icons">
+                        <i class="bi bi-file-earmark-text"></i>
+                        <p><strong>Certificates</strong><br>Generate and issue certificates for various medical needs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 MinSU HealthSync. All rights reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
