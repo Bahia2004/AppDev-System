@@ -83,7 +83,6 @@ exports.addQuantity = async (req, res) => {
   }
 };
 
-// Add Quantity to Inventory Item
 exports.addQuantityForm = async (req, res) => {
   const { id } = req.params;
   const { quantity_to_add } = req.body;
@@ -100,14 +99,18 @@ exports.addQuantityForm = async (req, res) => {
       return res.status(404).send('Item not found');
     }
 
-    const newQuantity = item.quantity + quantityChange;
+    const oldQuantity = item.quantity;
+    const newQuantity = oldQuantity + quantityChange;
 
     if (newQuantity < 0) {
       return res.status(400).send('Insufficient stock to subtract this quantity.');
     }
 
-    // Log the update in memory (positive for addition, negative for subtraction)
-    memoryStorage.logInventoryUpdate(id, quantityChange);
+    // Get the item name (medicine name)
+    const itemName = item.item_name;
+
+    // Log the update with quantity added and item name
+    memoryStorage.logInventoryUpdate(id, itemName, quantityChange, oldQuantity, newQuantity);
 
     // Update the quantity in the database
     await Inventory.addQuantity(id, quantityChange);
@@ -118,6 +121,7 @@ exports.addQuantityForm = async (req, res) => {
     res.status(500).send('Error updating quantity');
   }
 };
+
 
 
 exports.getItemHistory = async (req, res) => {
@@ -137,10 +141,3 @@ exports.getItemHistory = async (req, res) => {
     res.status(500).send('Error retrieving item history');
   }
 };
-
-
-
-
-
-
-
